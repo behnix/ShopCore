@@ -1,0 +1,164 @@
+﻿@page
+@model App.Pages.Admin.Post.EditModel
+
+@{
+    ViewData["Title"] = "ویرایش پست";
+    Layout = "_Admin";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-9">
+        <h2>ویرایش پست</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="/admin">خانه</a>
+            </li>
+            <li>
+                <a href="/admin/Post/">پست ها</a>
+            </li>
+            <li class="active">
+                ویرایش پست
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>افزودن پست</h5>
+                </div>
+                <div class="ibox-content">
+                    <form method="post" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="Post.PostId" />
+                        <input type="hidden" asp-for="Post.IsPublished" />
+                        <input type="hidden" asp-for="Post.PostCreationDate" />
+                        <input type="hidden" asp-for="Post.PostVisit" />
+                        <input type="hidden" asp-for="Post.ShortUrl" />
+                        <input type="hidden" name="oldImage" value="@ViewData["PostImage"]"/>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <label asp-for="Post.PostTitle" class="control-label"></label>
+                                    <input asp-for="Post.PostTitle" class="form-control" />
+                                    <span asp-validation-for="Post.PostTitle" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Post.PostDescription" class="control-label"></label>
+                                    <textarea asp-for="Post.PostDescription" rows="3" class="form-control"></textarea>
+                                    <span asp-validation-for="Post.PostDescription" class="text-danger"></span>
+                                </div>
+                                <hr />
+                                <h3 class="text-danger text-16">اختصاصی برای سئو</h3>
+                                <div class="form-group">
+                                    <label asp-for="Post.PostTitleInBrowser" class="control-label"></label>
+                                    <input asp-for="Post.PostTitleInBrowser" class="form-control" />
+                                    <span asp-validation-for="Post.PostTitleInBrowser" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Post.PostDescriptionForSearchEngines" class="control-label"></label>
+                                    <textarea asp-for="Post.PostDescriptionForSearchEngines" rows="3" class="form-control"></textarea>
+                                    <span asp-validation-for="Post.PostDescriptionForSearchEngines" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Post.PostTags" class="control-label"></label>
+                                    <input class="form-control" type="text" name="tags" id="tags" data-role="tagsinput" value="@ViewData["Tags"]">
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <label asp-for="Post.PostImage" class="control-label"></label>
+                                </div>
+                                <img id="PostImage" class="img-half" src="/assets/posts/thumb/@Model.Post.PostImage" alt="image" />
+                                <div class="form-group">
+                                    <p></p>
+                                    <input type="file" name="postImageUp" id="postImageUp">
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Post.GroupId" class="control-label"></label>
+                                    <select asp-for="Post.GroupId" class="form-control" asp-items="ViewBag.GroupId"></select>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Post.Author" class="control-label"></label>
+                                    <select asp-for="Post.Author" class="form-control" asp-items="ViewBag.Author"></select>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Post.PostSource" class="control-label"></label>
+                                    <input asp-for="Post.PostSource" class="form-control" />
+                                    <span asp-validation-for="Post.PostSource" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <div class="form-group">
+                                    <label asp-for="Post.PostContent" class="control-label"></label>
+                                    <textarea asp-for="Post.PostContent" class="form-control" rows="10"></textarea>
+                                    <span asp-validation-for="Post.PostContent" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <input type="submit" value="ثبت تغییرات" class="btn btn-primary btn-sm" />
+                            <a asp-page="Index" class="btn btn-danger btn-sm">بازگشت</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles{
+    <link rel="stylesheet" href="/adminAssets/css/bootstrap-tagsinput.css">
+}
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+    <script src="/adminAssets/js/typeahead.bundle.js"></script>
+    <script src="/adminAssets/js/bootstrap-tagsinput.min.js"></script>
+    <script>
+        function readURL(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#PostImage').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#postImageUp").change(function () {
+            readURL(this);
+        });
+
+        var tagsSelect = new Bloodhound({
+            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+
+        });
+        tagsSelect.initialize();
+
+        $('#tags').tagsinput({
+            typeaheadjs: {
+                name: 'tagsSelect',
+                displayKey: 'name',
+                valueKey: 'name',
+                source: tagsSelect.ttAdapter()
+            }
+        });
+
+        CKEDITOR.replace('Post_PostContent', {
+            customConfig: '/adminAssets/js/Config.js'
+        });
+        CKEDITOR.config.allowedContent = true;
+    </script>
+}

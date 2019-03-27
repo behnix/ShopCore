@@ -1,0 +1,75 @@
+﻿@page
+@using App.Core.Convertors
+@model App.Pages.Admin.Invoice.DetailsModel
+
+@{
+    ViewData["Title"] = "نمایش جزئیات فاکتور";
+    Layout = "~/Pages/Shared/_Admin.cshtml";
+}
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-9">
+        <h2>@ViewData["Title"]</h2>
+        <ol class="breadcrumb">
+            <li class="active">
+                <a href="/admin">خانه</a>
+            </li>
+            <li>
+                @ViewData["Title"]
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>@ViewData["Title"]</h5>
+                </div>
+                <div class="ibox-content">
+                    <p class="text-20"> سفارش دهنده:  <strong>"@Model.Invoice.CostumerName"</strong></p>
+                    <p class="text-20"> ایمیل:  <strong>"@Model.Invoice.CostumerEmail"</strong></p>
+                    <p class="text-20"> تلفن:  <strong>"@Model.Invoice.CostumerPhone"</strong></p>
+                    <p class="text-20"> آدرس پستی:  <strong>"@Model.Invoice.CostumerAddress"</strong></p>
+                    <p class="text-20"> مبلغ فاکتور:  <strong>"@Model.Invoice.Amount.ToPrice() تومان"</strong></p>
+                </div>
+                <hr />
+                <div class="ibox-content table-content table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="plantmore-product-thumbnail">#</th>
+                                <th class="plantmore-product-thumbnail">تصاویر</th>
+                                <th class="cart-product-name">محصول</th>
+                                <th class="plantmore-product-price">واحد قیمت</th>
+                                <th class="plantmore-product-quantity">تعداد</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @{ var i = 1;}
+                        @foreach (var item in Model.InvoiceDetails)
+                        {
+                            <tr>
+                                <td class="plantmore-product-quantity">
+                                    @(i++)
+                                </td>
+                                <td class="plantmore-product-thumbnail"><a href="#"><img src="/assets/products/thumb/@item.Product.Image" alt=""></a></td>
+                                <td class="plantmore-product-name"><a href="/product/@item.Product.MetaTitle">@item.Product.Title</a></td>
+                                <td class="plantmore-product-price"><span class="amount">@item.Product.Price.ToPrice() تومان</span></td>
+                                <td class="plantmore-product-quantity"><span class="amount">@item.Quantity عدد</span></td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="ibox-content">
+                    <form method="post">
+                        <input type="hidden" asp-for="Invoice.Id" />
+                        <input type="submit" value="ارسال شد" class="btn btn-warning btn-sm" />
+                        <a asp-page="Index" class="btn btn-danger btn-sm">بازگشت</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

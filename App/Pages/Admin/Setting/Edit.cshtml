@@ -1,0 +1,147 @@
+﻿@page
+@model App.Pages.Admin.Setting.EditModel
+
+@{
+    ViewData["Title"] = "تنظیمات سایت";
+    Layout = "_Admin";
+}
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-9">
+        <h2>تنظیمات کلی</h2>
+        <ol class="breadcrumb">
+            <li class="active">
+                <a href="/admin">خانه</a>
+            </li>
+            <li>
+                ویرایش تنظیمات کلی
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>ویرایش تنظیمات کلی</h5>
+                </div>
+                <div class="ibox-content">
+                    <form method="post">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <input type="hidden" asp-for="Setting.SettingId" />
+                        <input type="hidden" asp-for="Setting.SiteName" />
+                        <input type="hidden" asp-for="Setting.SiteDescription" />
+                        <input type="hidden" asp-for="Setting.SiteTel" />
+                        <input type="hidden" asp-for="Setting.SiteAddress" />
+                        <input type="hidden" asp-for="Setting.AboutUs" />
+                        <input type="hidden" asp-for="Setting.Index" />
+                        <input type="hidden" asp-for="Setting.Service1" />
+                        <input type="hidden" asp-for="Setting.Service1Icon" />
+                        <input type="hidden" asp-for="Setting.Service1Description" />
+                        <input type="hidden" asp-for="Setting.Service2" />
+                        <input type="hidden" asp-for="Setting.Service2Icon" />
+                        <input type="hidden" asp-for="Setting.Service2Description" />
+                        <input type="hidden" asp-for="Setting.Service3" />
+                        <input type="hidden" asp-for="Setting.Service3Icon" />
+                        <input type="hidden" asp-for="Setting.Service3Description" />
+                        <input type="hidden" asp-for="Setting.Service4" />
+                        <input type="hidden" asp-for="Setting.Service4Icon" />
+                        <input type="hidden" asp-for="Setting.Service4Description" />
+                        <input type="hidden" asp-for="Setting.ContactTitle" />
+                        <input type="hidden" asp-for="Setting.ContactDescription" />
+                        <input type="hidden" asp-for="Setting.FaqTitle" />
+                        <input type="hidden" asp-for="Setting.FaqDescription" />
+                        <input type="hidden" asp-for="Setting.FaqText" />
+                        <input type="hidden" asp-for="Setting.AboutUsTitle" />
+                        <input type="hidden" asp-for="Setting.AboutUsDescription" />
+                        <input type="hidden" asp-for="Setting.QuantityPostInIndex" />
+                        <div class="form-group">
+                            <label asp-for="Setting.SiteNameInEnglish" class="control-label"></label>
+                            <input asp-for="Setting.SiteNameInEnglish" class="form-control" />
+                            <span asp-validation-for="Setting.SiteNameInEnglish" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Setting.Slogan1" class="control-label"></label>
+                            <input asp-for="Setting.Slogan1" class="form-control" />
+                            <span asp-validation-for="Setting.Slogan1" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Setting.Slogan2" class="control-label"></label>
+                            <input asp-for="Setting.Slogan2" class="form-control" />
+                            <span asp-validation-for="Setting.Slogan2" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Setting.SiteEmail" class="control-label"></label>
+                            <input asp-for="Setting.SiteEmail" class="form-control" />
+                            <span asp-validation-for="Setting.SiteEmail" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Setting.SiteEmailPassword" class="control-label"></label>
+                            <input asp-for="Setting.SiteEmailPassword" class="form-control" />
+                            <span asp-validation-for="Setting.SiteEmailPassword" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Setting.SiteSmtp" class="control-label"></label>
+                            <input asp-for="Setting.SiteSmtp" class="form-control" />
+                            <span asp-validation-for="Setting.SiteSmtp" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Setting.SmtpPort" class="control-label"></label>
+                            <input asp-for="Setting.SmtpPort" class="form-control" />
+                            <span asp-validation-for="Setting.SmtpPort" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Setting.SiteSmsNumber" class="control-label"></label>
+                            <input asp-for="Setting.SiteSmsNumber" class="form-control" />
+                            <span asp-validation-for="Setting.SiteSmsNumber" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Setting.SiteSmsSigniture" class="control-label"></label>
+                            <input asp-for="Setting.SiteSmsSigniture" class="form-control" />
+                            <span asp-validation-for="Setting.SiteSmsSigniture" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Setting.MerchantId" class="control-label"></label>
+                            <input asp-for="Setting.MerchantId" class="form-control" />
+                            <span asp-validation-for="Setting.MerchantId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Setting.SiteTelegramId" class="control-label"></label>
+                            <input asp-for="Setting.SiteTelegramId" class="form-control" />
+                            <span asp-validation-for="Setting.SiteTelegramId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Setting.SiteInstagramId" class="control-label"></label>
+                            <input asp-for="Setting.SiteInstagramId" class="form-control" />
+                            <span asp-validation-for="Setting.SiteInstagramId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Setting.SiteTwitterId" class="control-label"></label>
+                            <input asp-for="Setting.SiteTwitterId" class="form-control" />
+                            <span asp-validation-for="Setting.SiteTwitterId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Setting.SiteFacebookId" class="control-label"></label>
+                            <input asp-for="Setting.SiteFacebookId" class="form-control" />
+                            <span asp-validation-for="Setting.SiteFacebookId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Setting.SiteCopyRightText" class="control-label"></label>
+                            <input asp-for="Setting.SiteCopyRightText" class="form-control" />
+                            <span asp-validation-for="Setting.SiteCopyRightText" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="ثبت تغییرات" class="btn btn-primary btn-sm" />
+                            <a asp-page="Index" class="btn btn-danger btn-sm">بازگشت</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

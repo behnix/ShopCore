@@ -1,0 +1,37 @@
+﻿@page "/error"
+@model ErrorModel
+@{
+    ViewData["Title"] = "بروز خطا";
+}
+<div class="breadcrumb-area bg-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ul>
+                    <li class="breadcrumb-item"><a href="/">خانه</a></li>
+                    <li class="breadcrumb-item active">@ViewData["Title"]</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content-wraper mt-60">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="about-info-wrapper py-5">
+                    <h2>@ViewData["Title"]</h2>
+                    @if (Model.ShowRequestId)
+                    {
+                        <p>متاسفانه در پردازش درخواست شما خطایی بوجود آمد. این خطا به صورت خودکار برای مدیر سایت ارسال می شود. لطفا بعدا تلاش بفرمائید.</p>
+                        <p>
+                            <strong>Request ID:</strong> <code>@Model.RequestId</code>
+                        </p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

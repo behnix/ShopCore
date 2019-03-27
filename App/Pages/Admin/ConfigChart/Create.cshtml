@@ -1,0 +1,79 @@
+﻿@page
+@model App.Pages.Admin.ConfigChart.CreateModel
+
+@{
+    ViewData["Title"] = "ثبت مشخصه ";
+    Layout = "_Admin";
+}
+
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-9">
+        <h2>@ViewData["Title"]</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="/admin">خانه</a>
+            </li>
+            <li>
+                <a href="/admin/ConfigChart/">مدیریت مشخصات</a>
+            </li>
+            <li class="active">
+                @ViewData["Title"]
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>@ViewData["Title"]</h5>
+                </div>
+                <div class="ibox-content">
+                    <form method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input asp-for="ConfigChart.CategoryId" value="@ViewBag.CategoryId" type="hidden" />
+                        <input asp-for="ConfigChart.ConfigGroupId" value="@ViewBag.ConfigGroupId" type="hidden" />
+                        <div class="form-group">
+                            <label asp-for="ConfigChart.Title" class="control-label"></label>
+                            <input asp-for="ConfigChart.Title" class="form-control" />
+                            <span asp-validation-for="ConfigChart.Title" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ConfigChart.Name" class="control-label"></label>
+                            <input asp-for="ConfigChart.Name" class="form-control" />
+                            <span asp-validation-for="ConfigChart.Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ConfigChart.FilterType" class="control-label"></label>
+                            <select asp-for="ConfigChart.FilterType" class="form-control">
+                                <option value="None">فیلتر نشود</option>
+                                <option value="Single">فیلتر شود</option>
+                            </select>
+                            <span asp-validation-for="ConfigChart.FilterType" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ConfigChart.ConfigDescription" class="control-label"></label>
+                            <textarea asp-for="ConfigChart.ConfigDescription" class="form-control" rows="5"></textarea>
+                            <span asp-validation-for="ConfigChart.ConfigDescription" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ConfigChart.ConfigDescriptionComplete" class="control-label"></label>
+                            <textarea asp-for="ConfigChart.ConfigDescriptionComplete" class="form-control" rows="5"></textarea>
+                            <span asp-validation-for="ConfigChart.ConfigDescriptionComplete" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="ثبت مشخصه" class="btn btn-primary btn-sm" />
+                            <a asp-page="Index" class="btn btn-danger btn-sm">بازگشت</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

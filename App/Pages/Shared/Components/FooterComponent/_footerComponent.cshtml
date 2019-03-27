@@ -1,0 +1,125 @@
+﻿@model App.Domain.Entities.Setting.Setting
+<footer>
+    <!-- about-corporate-area start -->
+    <div class="about-corporate-area bg-brown">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-0-sub">
+                    <!-- single-corporate start -->
+                    <div class="single-corporate">
+                        <div class="corporate-icon">
+                            <i class="ion-ios-timer-outline"></i>
+                        </div>
+                        <div class="corporate-text-des">
+                            <h3>@Model.ContactWorkHour</h3>
+                            <p>ساعات کاری</p>
+                        </div>
+                    </div>
+                    <!-- single-corporate end -->
+                </div>
+                <div class="col-lg-4 col-md-4 col-0-sub">
+                    <!-- single-corporate start -->
+                    <div class="single-corporate">
+                        <div class="corporate-icon">
+                            <i class="ion-ios-telephone"></i>
+                        </div>
+                        <div class="corporate-text-des">
+                            <h3><span class="ltr_text">@Model.SiteTel</span></h3>
+                            <p>پشتیبانی رایگان!</p>
+                        </div>
+                    </div>
+                    <!-- single-corporate end -->
+                </div>
+                <div class="col-lg-4 col-md-4 col-0-sub">
+                    <!-- single-corporate start -->
+                    <div class="single-corporate">
+                        <div class="corporate-icon">
+                            <i class="ion-email"></i>
+                        </div>
+                        <div class="corporate-text-des">
+                            <h3>@Model.SiteEmail</h3>
+                            <p>پشتیبانی سفارشات!</p>
+                        </div>
+                    </div>
+                    <!-- single-corporate end -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- about-corporate-area end -->
+    <!-- footer-top start -->
+    <div class="footer-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="footer-title">
+                        <h5>اطلاعات تماس</h5>
+                    </div>
+                    <div class="footer-content">
+                        <ul class="footer-contact">
+                            <li class="adress"> <i class="ion-ios-location"></i> <p>@Model.SiteAddress</p> </li>
+                            <li class="phone"><i class="ion-ios-telephone"></i> <p><span class="ltr_text">@Model.SiteTel</span></p></li>
+                            <li class="email"><i class="ion-android-mail"></i> <p>@Model.SiteEmail</p></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-item-mg">
+                    <div class="footer-title">
+                        <h5>اطلاعات</h5>
+                    </div>
+                    <div class="footer-content">
+                        <ul class="footer-list">
+                            <li><a href="/about">درباره ما</a></li>
+                            <li><a href="/contact">تماس با ما</a></li>
+                            <li><a href="/terms">قوانین و مقررات</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-item-mg">
+                    <div class="footer-title">
+                        <h5>خدمات مشتری</h5>
+                    </div>
+                    <div class="footer-content">
+                        <ul class="footer-list">
+                            <li><a href="userarea">حساب کاربری</a></li>
+                            <li><a href="/orders"> سابقه خرید</a></li>
+                            <li><a href="/favorites">علاقه‌مندی‌ها</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-item-mg">
+                    <div class="footer-title">
+                        <h5>محصولات</h5>
+                    </div>
+                    <div class="footer-content">
+                        <ul class="footer-list">
+                            <li><a href="/product">محصولات ویژه</a></li>
+                            <li><a href="/product">برند ها</a></li>
+                            <li><a href="/product">دسته بندی ها</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- footer-top end -->
+    <!-- footer-bottom start -->
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="footer-copyright">
+                        <p>نرم افزار مدیریت فروش  <a href="https://behnix.com">پاندا</a></p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="footer-copyright">
+                        <p class="text-md-right text-sm-center">@Html.Raw(Model.SiteCopyRightText)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- footer-bottom end -->
+
+</footer>

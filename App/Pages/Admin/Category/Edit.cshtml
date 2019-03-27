@@ -1,0 +1,97 @@
+﻿@page
+@model App.Pages.Admin.Category.EditModel
+
+@{
+    ViewData["Title"] = "ویرایش گروه محصولات";
+    Layout = "_Admin";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-9">
+        <h2>ویرایش گروه</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="/admin">خانه</a>
+            </li>
+            <li>
+                <a href="/admin/Category/">گروه ها</a>
+            </li>
+            <li class="active">
+                @ViewData["Title"]
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>@ViewData["Title"]</h5>
+                </div>
+                <div class="ibox-content">
+                    <form method="post" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="Category.Id" />
+                        <input type="hidden" asp-for="Category.ParentId" />
+                        <input type="hidden" name="oldImage" value="@ViewData["CategoryImage"]" />
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <label asp-for="Category.Name" class="control-label"></label>
+                                    <input asp-for="Category.Name" class="form-control" />
+                                    <span asp-validation-for="Category.Name" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Category.EnName" class="control-label"></label>
+                                    <input asp-for="Category.EnName" class="form-control" />
+                                    <span asp-validation-for="Category.EnName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                <div class="form-group">
+                                    <label asp-for="Category.CategoryImage" class="control-label"></label>
+                                </div>
+                                <img id="CategoryImage" class="img-half" src="/assets/categories/thumb/@Model.Category.CategoryImage" alt="image" />
+                                <div class="form-group">
+                                    <p></p>
+                                    <input type="file" name="categoryImageUp" id="categoryImageUp">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" value="ثبت تغییرات" class="btn btn-primary btn-sm" />
+                            <a asp-page="Index" class="btn btn-danger btn-sm">بازگشت</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        <script>
+            function readURL(input) {
+
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('#CategoryImage').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            $("#categoryImageUp").change(function () {
+                readURL(this);
+            });
+        </script>
+    }
+}

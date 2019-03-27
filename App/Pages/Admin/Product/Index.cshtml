@@ -1,0 +1,100 @@
+﻿@page
+@model App.Pages.Admin.Product.IndexModel
+
+@{
+    ViewData["Title"] = "مدیریت محصولات";
+    Layout = "_Admin";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-9">
+        <h2>@ViewData["Title"]</h2>
+        <ol class="breadcrumb">
+            <li class="active">
+                <a href="/admin">خانه</a>
+            </li>
+            <li>
+                @ViewData["Title"]
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <a asp-page="Create" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i>  افزودن محصول جدید</a>
+                </div>
+                <div class="ibox-title">
+                    <h5>لیست محصولات</h5>
+                </div>
+                <div class="ibox-content">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>
+                                    #
+                                </th>
+                                <th>
+                                    تصویر
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Product[0].Title)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Product[0].Model)
+                                </th>
+                                <th>
+                                    دسته بندی
+                                </th>
+                                <th>
+                                    برند
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Product[0].Price)
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{ var i = 1;}
+                            @foreach (var item in Model.Product)
+                            {
+                                <tr>
+                                    <td class="pt-20">
+                                        @(i++)
+                                    </td>
+                                    <td>
+                                        <img src="/assets/products/img/@item.Image" class="img-thumb" alt="@item.Title" />
+                                    </td>
+                                    <td class="pt-20">
+                                        @Html.DisplayFor(modelItem => item.Title)
+                                    </td>
+                                    <td class="pt-20">
+                                        @Html.DisplayFor(modelItem => item.Model)
+                                    </td>
+                                    <td class="pt-20">
+                                        @Html.DisplayFor(modelItem => item.Category.Name)
+                                    </td>
+                                    <td class="pt-20">
+                                        @Html.DisplayFor(modelItem => item.Brand.Name)
+                                    </td>
+                                    <td class="pt-20">
+                                        @Html.DisplayFor(modelItem => item.Price)
+                                    </td>
+                                    <td class="pt-15">
+                                        <a asp-page="./Edit" asp-route-id="@item.ProductId" class="btn btn-warning btn-sm"> ویرایش</a>
+                                        <a asp-page="./Delete" asp-route-id="@item.ProductId" class="btn btn-danger btn-sm"> حذف</a>
+                                        <a asp-page="./ConfigDetail" asp-route-productId="@item.ProductId" asp-route-categoryId="@item.CategoryId" class="btn btn-success btn-sm"> بروزرسانی مشخصه ها</a>
+                                        <a asp-page="../Comment/Index" asp-route-productId="@item.ProductId" class="btn btn-info btn-sm"> دیدگاه ها</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

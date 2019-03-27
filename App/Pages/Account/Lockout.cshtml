@@ -1,0 +1,31 @@
+﻿@page "/lockout"
+@model App.Pages.Account.LockoutModel
+@{
+    ViewData["Title"] = "مسدودی حساب کاربری";
+}
+
+<div class="breadcrumb-area bg-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ul>
+                    <li class="breadcrumb-item"><a href="/">خانه</a></li>
+                    <li class="breadcrumb-item active">@ViewData["Title"]</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content-wraper mt-60">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="about-info-wrapper">
+                    <h2>@ViewData["Title"]</h2>
+                    <p>کاربر گرامی حساب کاربری شما موقتا مسدود است.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

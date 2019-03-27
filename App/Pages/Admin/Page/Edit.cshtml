@@ -1,0 +1,119 @@
+﻿@page
+@model App.Pages.Admin.Page.EditModel
+
+@{
+    ViewData["Title"] = "ویرایش صفحه";
+    Layout = "_Admin";
+    var groupList = ViewData["Groups"] as Dictionary<int, string>;
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-9">
+        <h2>ویرایش صفحه</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="/admin">خانه</a>
+            </li>
+            <li>
+                <a href="/admin/Page/">صفحه ها</a>
+            </li>
+            <li class="active">
+                ویرایش صفحه
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>افزودن پست</h5>
+                </div>
+                <div class="ibox-content">
+                    <form method="post" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="Page.PageId" />
+                        <input type="hidden" asp-for="Page.PageCreateDate" />
+                        <input type="hidden" asp-for="Page.PageVisit" />
+                        <input type="hidden" asp-for="Page.PageShortUrl" />
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="Page.PageTitle" class="control-label"></label>
+                                    <input asp-for="Page.PageTitle" class="form-control" />
+                                    <span asp-validation-for="Page.PageTitle" class="text-danger"></span>
+                                </div>
+                                <h3 class="text-danger text-16">اختصاصی برای سئو</h3>
+                                <div class="form-group">
+                                    <label asp-for="Page.PageTitleInBrowser" class="control-label"></label>
+                                    <input asp-for="Page.PageTitleInBrowser" class="form-control" />
+                                    <span asp-validation-for="Page.PageTitleInBrowser" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Page.PageDescriptionForSearchEngines" class="control-label"></label>
+                                    <textarea asp-for="Page.PageDescriptionForSearchEngines" rows="3" class="form-control"></textarea>
+                                    <span asp-validation-for="Page.PageDescriptionForSearchEngines" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Page.PageContent" class="control-label"></label>
+                                    <textarea asp-for="Page.PageContent" class="form-control" rows="10"></textarea>
+                                    <span asp-validation-for="Page.PageContent" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Page.RelatedPostGroup" class="control-label"></label>
+                                    <select name="Page.RelatedPostGroup" class="form-control">
+                                        @if (Model.Page.RelatedPostGroup == 0)
+                                        {
+                                            <option value="0" selected="selected">به هیچ گروهی مرتبط نیست</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="0">به هیچ گروهی مرتبط نیست</option>
+                                        }
+                                        @foreach (var item in groupList.ToList())
+                                        {
+                                            if (Model.Page.RelatedPostGroup == item.Key)
+                                            {
+                                                <option value="@item.Key" selected="selected">@item.Value</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@item.Key">@item.Value</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Page.QuantityPostInPage" class="control-label"></label>
+                                    <input asp-for="Page.QuantityPostInPage" class="form-control" />
+                                    <span asp-validation-for="Page.QuantityPostInPage" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <input type="submit" value="ثبت تغییرات" class="btn btn-primary btn-sm" />
+                            <a asp-page="Index" class="btn btn-danger btn-sm">بازگشت</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('Page_PageContent', {
+            customConfig: '/adminAssets/js/Config.js'
+        });
+        CKEDITOR.config.allowedContent = true;
+    </script>
+}

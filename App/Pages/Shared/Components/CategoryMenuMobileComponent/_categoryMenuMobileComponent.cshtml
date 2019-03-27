@@ -1,0 +1,27 @@
+﻿@using App.Pages.Admin.Category
+@model IEnumerable<App.Domain.Entities.Product.Category>
+<div class="container d-block d-lg-none">
+    <div class="vertical-menu mt-30">
+        <span class="categorie-title mobile-categorei-menu">تمامی دسته ها</span>
+        <nav>
+            <div class="category-menu sidebar-menu sidbar-style mobile-categorei-menu-list menu-hidden " id="cate-mobile-toggle">
+                <ul>
+                    @foreach (var category in Model.Where(c=>c.ParentId == 0).ToList())
+                    {
+                        <li class="has-sub">
+                         <a href="#">@Html.Raw(category.Name)</a>
+                            <ul class="category-sub">
+                                @foreach (var subCategory in Model.Where(c => c.ParentId == category.Id).ToList())
+                                {
+                                    <li>
+                                        <a href="/shop?selectedCategory=@subCategory.Id">@Html.Raw(subCategory.Name)</a>
+                                    </li>
+                                }
+                            </ul>
+                     </li>
+                    }
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>

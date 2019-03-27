@@ -1,0 +1,220 @@
+﻿@page "/product/{metaTitle}"
+@using App.Core.Convertors
+@model App.Pages.ProductModel
+
+@{
+    ViewData["Title"] = Model.Product.MetaTitle;
+}
+
+<div class="breadcrumb-area bg-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="breadcrumb-list">
+                    <li class="breadcrumb-item"><a href="/">خانه</a></li>
+                    <li class="breadcrumb-item"><a href="/shop">فروشگاه</a></li>
+                    <li class="breadcrumb-item active">@Html.Raw(Model.Product.Title)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content-wraper bg-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="sinlge-product-wrap box-module">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="single-product-tab">
+                                <div class="zoomWrapper">
+                                    <div id="img-1" class="zoomWrapper single-zoom">
+                                        <a href="#">
+                                            <img id="zoom1" src="/assets/products/img/@Model.Product.Image" data-zoom-image="/assets/products/img/@Model.Product.Image" alt="@Html.Raw(Model.Product.Title)">
+                                        </a>
+                                    </div>
+                                    <div class="single-zoom-thumb">
+                                        <ul class="s-tab-zoom single-product-active owl-carousel" id="gallery_01">
+                                            <li>
+                                                <a href="#" class="elevatezoom-gallery active" data-update="" data-image="/assets/products/img/@Model.Product.Image" data-zoom-image="/assets/products/img/@Model.Product.Image"><img src="/assets/products/img/@Model.Product.Image" alt="@Html.Raw(Model.Product.Title)"></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="quick-view-content">
+                                <div class="product-info">
+                                    <h2>@Html.Raw(Model.Product.Title)</h2>
+                                    <div class="rating-box">
+                                        <ul class="rating d-flex">
+                                            <li><i class="ion-ios-star"></i></li>
+                                            <li><i class="ion-ios-star"></i></li>
+                                            <li><i class="ion-ios-star"></i></li>
+                                            <li><i class="ion-android-star-outline"></i></li>
+                                            <li><i class="ion-android-star-outline"></i></li>
+                                        </ul>
+                                    </div>
+                                    <div class="price-box">
+                                        <span class="new-price">@Model.Product.Price.ToPrice() تومان</span>
+                                    </div>
+                                    <ul class="list-unstyled">
+                                        <li>برند: <a href="#">@Html.Raw(Model.Product.Brand.Name)</a></li>
+                                        <li>کد محصول: @Model.Product.ProductId</li>
+                                        <li>گارانتی: @Html.Raw(Model.Product.Guarantee)</li>
+                                        <li>وضعیت: @((Model.Product.Status) ? "موجود" : "ناموجود")</li>
+
+                                    </ul>
+                                    <div class="quick-add-to-cart">
+                                        <div class="modal-cart">
+                                            <a class="btn btn-danger text-white" href="/AddToCart/@Model.Product.ProductId">افزودن به سبد</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="product-info-detailed">
+                                <div class="discription-tab-menu">
+                                    <ul role="tablist" class="nav">
+                                        <li class="active"><a href="#description" data-toggle="tab" class="active show">توضیحات</a></li>
+                                        <li><a href="#specs" data-toggle="tab">مشخصات</a></li>
+                                        <li><a href="#review" data-toggle="tab">نظرات کاربران</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="discription-content">
+                                <div class="tab-content">
+                                    <div class="tab-pane fade in active show" id="description">
+                                        <div class="description-content">
+                                            <p>@Html.Raw(Model.Product.Description)</p>
+                                        </div>
+                                    </div>
+                                    <div id="specs" class="tab-pane fade">
+                                        @if (Model.ConfigDetails.Any())
+                                        {
+                                            foreach (var configGroups in Model.ConfigGroups)
+                                            {
+                                                if (Model.ConfigCharts.Any(cc => cc.ConfigGroupId == configGroups.Id && cc.CategoryId == configGroups.CategoryId) && Model.ConfigDetails.Any(cd => cd.ConfigGroupId == configGroups.Id && (cd.Value != "" && cd.Value != string.Empty && cd.Value != null)))
+                                                {
+                                                    <div class="mb-5">
+                                                        <h4 class="text-secondary font-weight-bold mb-0">
+                                                            <i class="fa fa-angle-left" aria-hidden="true"></i>
+                                                            &nbsp;&nbsp;@Html.Raw(configGroups.Title)
+                                                        </h4>
+                                                        @foreach (var configCharts in Model.ConfigCharts.Where(cc => cc.ConfigGroupId == configGroups.Id))
+                                                        {
+                                                            if (Model.ConfigDetails.SingleOrDefault(cd => cd.ConfigChartId == configCharts.Id) != null && !string.IsNullOrWhiteSpace(Model.ConfigDetails.SingleOrDefault(cd => cd.ConfigChartId == configCharts.Id).Value))
+                                                            {
+                                                                <div class="row mb-3 m-2">
+                                                                    <div class="col-12 col-md-2 p-sm-0 pl-lg-2">
+                                                                        <div class="col-12 col-md-10 p-2 text-left rtl secondary-light-bg-color p-2">
+                                                                            @Html.Raw(configCharts.Title.Trim())
+                                                                        </div>
+                                                                    </div>
+                                                                    @if (Model.ConfigDetails.SingleOrDefault(cd => cd.ConfigChartId == configCharts.Id).Value.Trim() == "دارد")
+                                                                    {
+                                                                        <div class="col-12 col-md-10 p-2 text-left rtl success-light-bg-color">
+                                                                            <i class="fa fa-check text-success" aria-hidden="true"></i>
+
+                                                                        </div>
+                                                                    }
+                                                                    else if (Model.ConfigDetails.SingleOrDefault(cd => cd.ConfigChartId == configCharts.Id).Value.Trim() == "ندارد")
+                                                                    {
+                                                                        <div class="col-12 col-md-10 p-2 text-left rtl danger-light-bg-color">
+                                                                            <i class="fa fa-times text-danger" aria-hidden="true"></i>
+
+                                                                        </div>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <div class="col-12 col-md-10 p-2 text-left rtl text-secondary secondary-light-bg-color">
+                                                                            @Html.Raw(Model.ConfigDetails.SingleOrDefault(cd => cd.ConfigChartId == configCharts.Id).Value.Trim())
+                                                                        </div>
+                                                                    }
+                                                                </div>
+                                                            }
+
+                                                        }
+                                                    </div>
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            @: تا کنون هیچ مشخصه فنی برای این محصول بارگزاری نشده است.
+                                        }
+
+                                    </div>
+                                    <div id="review" class="tab-pane fade">
+                                        <div class="review px-3">
+                                            <ul>
+                                                @foreach (var comment in Model.Comments.Where(c => c.IsConfirmed).ToList())
+                                                {
+                                                    <li>
+                                                        <div class="row">
+                                                            <div class="col-xs-12 col-sm-12 col-md-8  p-3 bg-light">
+                                                                <strong>@Html.Raw(comment.User.FirstName) @Html.Raw(comment.User.LastName)</strong>
+                                                            </div>
+                                                            <div class="col-xs-12 col-sm-12 col-md-4 text-right p-3 bg-light">
+                                                                <strong>@Html.Raw(comment.CommentedOn.ToShamsi())</strong>
+                                                            </div>
+                                                            <div class="col-xs-12 col-sm-12 col-md-12 p-3 text-secondary text-justify line-height-25">@Html.Raw(comment.Content)</div>
+                                                        </div>
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </div>
+                                        <form method="post" class="form-review">
+                                            <div class="review-wrap">
+                                                @if (Model.Comments.Any())
+                                                {
+                                                    <h3 class="h6">دیدگاه خود را در مورد این محصول بیان کنید</h3>
+                                                }
+                                                else
+                                                {
+                                                    <h3 class="h6">اولین نفری باشید که در مورد این محصول نظر می دهد</h3>
+                                                }
+                                                @if (User.Identity.IsAuthenticated)
+                                                {
+                                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                                    <input type="hidden" asp-for="Comment.ProductId" value="@Model.Product.ProductId" />
+                                                    <input type="hidden" name="userName" value="@User.Identity.Name" />
+                                                    <div class="form-group row">
+                                                        <div class="col">
+                                                            <textarea asp-for="Comment.Content" class="form-control text-secondary p-2 text-size-14" rows="3" placeholder="دیدگاه شما"></textarea>
+                                                            <span asp-validation-for="Comment.Content" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="buttons clearfix">
+                                                        <div class="pull-right">
+                                                            <input type="submit" name="name" class="button-review" value="ثبت دیدگاه" />
+                                                        </div>
+                                                        <div class="pull-left">
+                                                            <span class="text-success text-size-14 rtl">@Html.Raw(ViewBag.Message)</span>
+                                                        </div>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <h3 class="h6">برای ثبت دیگاه خود حتما می بایست با حساب کاربری خود وارد شده باشید</h3>
+                                                    <br />
+                                                    <a asp-page="/Account/login" asp-route-returnTo="product/@Html.Raw(Model.Product.MetaTitle)" class="btn btn-danger btn-sm">ورود به سایت</a>
+                                                }
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="about-info-wrapper py-5">
+        </div>
+    </div>
+</div>

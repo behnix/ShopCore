@@ -1,0 +1,270 @@
+﻿@page
+@using App.Core.Convertors
+@model App.Pages.ShopModel
+
+@{
+    ViewData["Title"] = "فروشگاه";
+}
+@{
+    int take = ViewBag.take;
+}
+<div class="breadcrumb-area bg-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="breadcrumb-list">
+                    <li class="breadcrumb-item"><a href="/">خانه</a></li>
+                    <li class="breadcrumb-item active">فروشگاه</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content-wraper bg-gray">
+    <div class="container">
+        <form id="formFilter" method="get">
+            <input type="hidden" id="pageId" name="pageId" value="@ViewBag.page.ToString()" />
+            <div class="row">
+                <div class="col-lg-3 order-2 order-lg-1">
+                    <div class="filter-price sidebar-categores-box mt-60">
+                        <div class="secton-title">
+                            <h2>قیمت</h2>
+                        </div>
+                        <div class="filter-price-content">
+                            <div id="price-slider" class="price-slider"></div>
+                            <div class="filter-price-wapper">
+                                <div class="filter-price-cont">
+                                    <div class="input-type">
+                                        <input onchange="changeCommit()" type="hidden" name="maxPrice" id="max-price">
+                                        <span id="max-price-text"></span>
+                                    </div>
+                                    <span>&nbsp;—&nbsp;</span>
+                                    <div class="input-type">
+                                        <input onchange="changeCommit()" type="hidden" name="minPrice" id="min-price">
+                                        <span id="min-price-text"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @await Component.InvokeAsync("CategoriesInShopComponent", new { selectedCategory = ViewBag.selectedCategory })
+                    @await Component.InvokeAsync("BrandsInShopComponent", new { selectedBrand = ViewBag.selectedBrand })
+                </div>
+                <div class="col-lg-9 order-1 order-lg-2">
+                    <div class="row">
+                        <div class="col">
+                            <div class="shop-top-bar mt-60">
+                                <div class="shop-bar-inner">
+                                    <div class="product-view-mode">
+                                        <ul role="tablist" class="nav shop-item-filter-list">
+                                            <li role="presentation" class="active"><a href="#grid" aria-controls="grid" role="tab" data-toggle="tab" class="active show" aria-selected="true"><i class="fa fa-th"></i></a></li>
+                                            <li role="presentation"><a href="#list" aria-controls="list" role="tab" data-toggle="tab"><i class="fa fa-th-list"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="toolbar-amount">
+                                        <span>در حال نمایش @(ViewBag.from == 0 ? "1" : ViewBag.from) تا @(Model.ResultTuple.Item2 < ViewBag.to ? Model.ResultTuple.Item2 : ViewBag.to) از @(Model.ResultTuple.Item2) محصول </span>
+                                    </div>
+                                </div>
+                                <div class="product-select-box">
+                                    <div class="product-show">
+                                        <p>نمایش:</p>
+                                        <select onchange="changeCommit()" class="nice-select" name="take" style="display: none;">
+                                            <!option value="9" @(take == 9 ? "selected" : "")>9</!option>
+                                            <!option value="12" @(take == 12 ? "selected" : "")>12</!option>
+                                            <!option value="15" @(take == 15 ? "selected" : "")>15</!option>
+                                            <!option value="30" @(take == 30 ? "selected" : "")>30</!option>
+                                            <!option value="60" @(take == 60 ? "selected" : "")>60</!option>
+                                        </select>
+                                    </div>
+                                    <div class="product-short">
+                                        <p>مرتب سازی:</p>
+                                        @{
+                                            string orderBy = ViewBag.orderBy;
+                                        }
+                                        <select onchange="changeCommit()" class="nice-select" name="orderBy" style="display: none;">
+                                            <!option value="date" @(orderBy == "date" ? "selected" : "")>جدیدترین</!option>
+                                            <!option value="visit" @(orderBy == "visit" ? "selected" : "")>پر بازدیدترین</!option>
+                                            <!option value="sale" @(orderBy == "sale" ? "selected" : "")>پرفروشترین</!option>
+                                            <!option value="lowPrice" @(orderBy == "lowPrice" ? "selected" : "")>قیمت کم به زیاد</!option>
+                                            <!option value="highPrice" @(orderBy == "highPrice" ? "selected" : "")>قیمت زیاد به کم</!option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="shop-products-wrapper">
+                        <div class="tab-content">
+                            <div id="grid" class="tab-pane fade active show" role="tabpanel">
+                                <div class="shop-product-wrap box-module">
+                                    <div class="row">
+                                        @if (Model.ResultTuple.Item1.Any())
+                                        {
+                                            foreach (var product in Model.ResultTuple.Item1)
+                                            {
+                                                <div class="col-lg-4 col-md-4 col-sm-6">
+                                                    <div class="sinle-product-item mb-20">
+                                                        <div class="product-thumb">
+                                                            <a href="/product/@Html.Raw(product.MetaTitle)">
+                                                                <img alt="@Html.Raw(product.Title)" src="/assets/products/img/@product.Image" class="primary-image">
+                                                            </a>
+                                                            <div class="add-to-cart">
+                                                                <a href="/AddToCart/@product.ProductId" class="btn-cart"><span> افزودن به سبد </span></a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="product-info">
+                                                            <div class="rating-box">
+                                                                <ul class="rating d-flex">
+                                                                    <li><i class="ion-ios-star"></i></li>
+                                                                    <li><i class="ion-ios-star"></i></li>
+                                                                    <li><i class="ion-ios-star"></i></li>
+                                                                    <li><i class="ion-ios-star"></i></li>
+                                                                    <li><i class="ion-android-star-outline"></i></li>
+                                                                </ul>
+                                                            </div>
+                                                            <h4 class="product-name"><a href="/product/@Html.Raw(product.MetaTitle)">@Html.Raw(product.Title)</a></h4>
+                                                            <div class="price-box">
+                                                                <span class="new-price">@product.Price.ToPrice() تومان</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <div class="col-md-12">
+                                                <p class="px-3 pt-3 text-danger">هیچ محصولی یافت نشد.</p>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="list" class="tab-pane fade" role="tabpanel">
+                                <div class="shop-product-list-wrap box-module">
+                                    <div class="row">
+                                        <div class="col">
+                                            @if (Model.ResultTuple.Item1.Any())
+                                            {
+                                                foreach (var product in Model.ResultTuple.Item1)
+                                                {
+                                                    <div class="row product-layout-list">
+                                                        <div class="col-lg-5 col-md-5">
+                                                            <div class="sinle-product-item">
+                                                                <div class="product-thumb">
+                                                                    <a href="/product/@Html.Raw(product.MetaTitle)">
+                                                                        <img alt="@Html.Raw(product.Title)" src="/assets/products/img/@product.Image" class="primary-image">
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-7 col-md-7">
+                                                            <div class="product-info">
+                                                                <div class="rating-box">
+                                                                    <ul class="rating d-flex">
+                                                                        <li><i class="ion-ios-star"></i></li>
+                                                                        <li><i class="ion-ios-star"></i></li>
+                                                                        <li><i class="ion-ios-star"></i></li>
+                                                                        <li><i class="ion-ios-star"></i></li>
+                                                                        <li><i class="ion-android-star-outline"></i></li>
+                                                                    </ul>
+                                                                </div>
+                                                                <h4 class="product-name"><a href="/product/@Html.Raw(product.MetaTitle)">@Html.Raw(product.Title)</a></h4>
+                                                                <div class="price-box">
+                                                                    <span class="new-price">@product.Price.ToPrice() تومان</span>
+                                                                </div>
+                                                                <p class="product-des">@Html.Raw(product.Description)</p>
+                                                                <a href="/AddToCart/@product.ProductId" class="btn btn-danger text-white"><span> افزودن به سبد </span></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <div class="col-md-12">
+                                                    <p class="px-3 pt-3 text-danger">هیچ محصولی یافت نشد.</p>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="paginatoin-area">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12">
+                                        @{
+                                            int pageNumber = ViewBag.page;
+                                            int pagePlus1 = pageNumber + 1;
+                                            int pageMinus1 = pageNumber - 1;
+                                            int condition = (Model.ResultTuple.Item2 % take == 0 ? Model.ResultTuple.Item2 / take : (Model.ResultTuple.Item2 / take) + 1);
+                                        }
+                                            
+                                        @if (condition > 1)
+                                        {
+                                            <ul class="pagination-box">
+                                                @if (pageMinus1 > 0)
+                                                {
+                                                    <li><a href="#" onclick="changePage(@(pageNumber - 1))" class="Previous"> <i class="fa fa-angle-double-right"></i> </a></li>
+                                                }
+                                                @for (int i = 1; i <= condition; i++)
+                                                {
+                                                    if (i == pageNumber)
+                                                    {
+                                                        @:<li><a class="active">@i</a></li>
+                                                    }
+                                                    else
+                                                    {
+                                                        <li><a onclick="changePage(@i)">@i</a></li>
+                                                    }
+                                                }
+                                                @if (pagePlus1 < condition)
+                                                {
+                                                    <li><a href="#" onclick="changePage(@(pageNumber + 1))" class="Next"> <i class="fa fa-angle-double-left"></i> </a></li>
+                                                }
+                                            </ul>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@section scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        function changePage(pageId) {
+            $("#pageId").val(pageId);
+            $("#formFilter").submit();
+        }
+        $("#price-slider").slider({
+            range: true,
+            min: @ViewData["minPriceInAllProducts"],
+            max: @ViewData["maxPriceInAllProducts"],
+            values: [@ViewData["min"], @ViewData["max"]],
+            step: 1000,
+            slide: function (event, ui) {
+                $("#min-price-text").html(ui.values[0] + ' تومان');
+                $("#max-price-text").html(ui.values[1] + ' تومان');
+                $("#min-price").val(ui.values[0]);
+                $("#max-price").val(ui.values[1]);
+            }
+        });
+        $("#min-price-text").html($("#price-slider").slider("values", 0) + ' تومان');
+        $("#max-price-text").html($("#price-slider").slider("values", 1) + ' تومان');
+        $("#min-price").val($("#price-slider").slider("values", 0));
+        $("#max-price").val($("#price-slider").slider("values", 1));
+        function changeCommit() {
+            $("#pageId").val(1);
+            $("#formFilter").submit();
+        }
+    </script>
+}

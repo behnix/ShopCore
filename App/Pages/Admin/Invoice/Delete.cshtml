@@ -1,0 +1,44 @@
+﻿@page
+@model App.Pages.Admin.Invoice.DeleteModel
+
+@{
+    ViewData["Title"] = "حذف فاکتور";
+    Layout = "_Admin";
+}
+
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-9">
+        <h2>حذف گروه</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="/admin">خانه</a>
+            </li>
+            <li>
+                <a href="/admin/Invoice/">فاکتورها</a>
+            </li>
+            <li class="active">
+                @ViewData["Title"]
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>@ViewData["Title"]</h5>
+                </div>
+                <div class="ibox-content">
+                    <p class="text-20">آیا از حذف فاکتور شماره <strong>"@Model.Invoice.Id"</strong> اطمینان دارید؟</p>
+                    <form method="post">
+                        <input type="hidden" asp-for="Invoice.Id" />
+                        <input type="submit" value="تائید حذف" class="btn btn-warning btn-sm" />
+                        <a asp-page="Index" class="btn btn-danger btn-sm">بازگشت</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

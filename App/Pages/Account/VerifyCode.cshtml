@@ -1,0 +1,55 @@
+﻿@page
+@model App.Pages.Account.VerifyCodeModel
+@{
+    ViewData["Title"] = "تائید کد تائیدیه";
+}
+
+<div class="breadcrumb-area bg-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ul>
+                    <li class="breadcrumb-item"><a href="/">خانه</a></li>
+                    <li class="breadcrumb-item active">@ViewData["Title"]</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content-wraper mt-60">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="about-info-wrapper">
+                    <h2>@ViewData["Title"]</h2>
+
+                    <form method="post" class="p-3" asp-route-returnTo="VerifyCode.ReturnTo">
+
+                        <input asp-for="VerifyCode.RememberMe" type="hidden" />
+                        <input asp-for="VerifyCode.Provider" type="hidden" />
+
+                        <div class="form-group">
+                            <input asp-for="VerifyCode.Code" class="form-control" />
+                        </div>
+
+                        <span asp-validation-for="VerifyCode.Code" class="text-danger"></span>
+
+                        <br />
+
+                        <input asp-for="VerifyCode.BrowserRemember" class="form-control" />
+                        <label asp-for="VerifyCode.BrowserRemember"></label>
+
+                        <hr />
+
+                        <button type="submit" class="btn btn-success">Verify Code</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

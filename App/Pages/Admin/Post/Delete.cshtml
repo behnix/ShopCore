@@ -1,0 +1,76 @@
+﻿@page
+@model App.Pages.Admin.Post.DeleteModel
+
+@{
+    ViewData["Title"] = "حذف پست";
+    Layout = "_Admin";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-9">
+        <h2>حذف پست</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="/admin">خانه</a>
+            </li>
+            <li>
+                <a href="/admin/Post/">پست ها</a>
+            </li>
+            <li class="active">
+                حذف پست
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>آیا از حذف این پست اطمینان دارید؟</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-3 text-center ">
+                            <img src="/assets/posts/thumb/@Model.Post.PostImage" alt="@Model.Post.PostTitle" />
+                        </div>
+                        <div class="col-sm-12 col-md-9">
+                            <div class="row">
+                                <div class="col-12">
+                                    <p>
+                                        @Html.DisplayNameFor(model => model.Post.PostTitle) :
+                                        @Html.DisplayFor(model => model.Post.PostTitle)
+                                    </p>
+                                    <p>
+                                        @Html.DisplayNameFor(model => model.Post.PostDescription) :
+                                        @Html.DisplayFor(model => model.Post.PostDescription)
+                                    </p>
+                                    <p>
+                                        @Html.DisplayNameFor(model => model.Post.User) :
+                                        @Html.DisplayFor(model => model.Post.User.UserName)
+                                    </p>
+                                    <p>
+                                        @Html.DisplayNameFor(model => model.Post.Group) :
+                                        @Html.DisplayFor(model => model.Post.Group.GroupTitle)
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <br />
+                                    <form method="post">
+                                        <input type="hidden" asp-for="Post.PostId" />
+                                        <input type="submit" value="بله پست حذف شود؟" class="btn btn-danger btn-sm" />
+                                        <a asp-page="Index" class="btn btn-info btn-sm">بازگشت</a>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,272 @@
+a:hover {
+    color: #e64545 !important;
+}
+#scrollUp:hover {
+    background: #e64545;
+    color: #f0f1f2
+}
+.prodict-two-active .owl-prev,
+.prodict-two-active .owl-next {
+    margin-top: 220px !important
+}
+.search-form-input .top-search-btn:hover {
+    background: #e64545;
+}
+.btn-group .dropdown-menu li > a:hover {
+    color: #e64545;
+}
+.line-height-25 {
+    line-height: 25px;
+}
+.shearch-fore .search-form-input {
+    border: 2px solid #e64545;
+}
+
+.text-size-14 {
+    font-size: 14px;
+}
+
+.rtl {
+    direction: rtl;
+}
+
+.secondary-light-bg-color {
+    background-color: #f0f1f2
+}
+
+.danger-light-bg-color {
+    background-color: #fcf5f5
+}
+
+.success-light-bg-color {
+    background-color: #f5fcf5
+}
+.pagination-box li a:hover {
+    background: #e64545;
+    color: #f0f1f2 !important;
+}
+.breadcrumb-item.active {
+    color: #e64545;
+}
+.pagination-box li a.active {
+    background: #e64545;
+    color: #f0f1f2 !important;
+}
+.vertical-menu > span {
+    background: #e64545 none repeat scroll 100% 0;
+}
+
+.slider-active .owl-dots .owl-dot.active {
+    background: #e64545 none repeat scroll 100% 0;
+}
+#cate-mobile-toggle .category-sub > li > a:before {
+    color: #e64545;
+}
+
+.secton-title h2:after {
+    background: #e64545 none repeat scroll 100% 0;
+}
+
+.rating-box .rating li {
+    color: #e64545;
+}
+#scrollUp:hover {
+    color: #f0f1f2 !important;
+}
+.home-4 .sinle-product-item .add-to-cart .btn-cart {
+    background: grey
+}
+.sidebar-menu li:hover > a,
+.sidebar-menu li.has-sub:hover > a,
+.sidebar-menu li.has-sub.open > a {
+    color: #e64545;
+}
+#top-shopoing-cart .item-text-number {
+    background: #e64545 none repeat scroll 100% 0 !important;
+}
+
+#top-shopoing-cart .dropdown-menu .cart-info .cart-price {
+    color: #e64545 !important;
+}
+
+#top-shopoing-cart p.cart-button a:hover {
+    background: #e64545 !important;
+}
+.product-view-mode ul li a:hover {
+    color: #e64545;
+}
+
+.product-view-mode ul li a.active {
+    color: #e64545;
+}
+#top-shopoing-cart .cart-total-box h5 span {
+    color: #e64545 !important;
+}
+
+#top-shopoing-cart .mini-cart-3 p.cart-button a:hover {
+    background: #e64545 !important;
+}
+
+.slider-text-info.style-2 .slider-1-des p span {
+    color: #e64545 !important;
+}
+
+.slider-text-info.style-2 .slier-btn-1 a {
+    border: 2px solid #e64545 !important;
+    color: #e64545 !important;
+}
+
+    .slider-text-info.style-2 .slier-btn-1 a:hover {
+        background: #e64545 !important;
+        border-color: #e64545 !important;
+    }
+
+.categories-toggler-menu {
+    background: #e64545 none repeat scroll 100% 0 !important;
+}
+
+.single-product-module-1 .product-desc .price-box .new-price {
+    color: #e64545 !important;
+}
+
+.home-4 .secton-title h2:after {
+    background: #e64545 none repeat scroll 100% 0 !important;
+}
+
+.home-4 .single-product-module-1 .product-desc .btn-cart:hover {
+    background: #e64545 none repeat scroll 100% 0 !important;
+}
+
+.home-2 .single-product-module-1 .product-desc .btn-cart:hover {
+    background: #fff none repeat scroll 100% 0 !important;
+}
+
+.label-sale {
+    background: #e64545 none repeat scroll 100% 0 !important;
+}
+
+    .label-sale.labele-sale-2 {
+        background: #e64545 none repeat scroll 100% 0 !important;
+    }
+
+.single-deals-offer .price-box .new-price {
+    color: #e64545 !important;
+}
+
+.fcategory-content:hover .fcategory-title h3 a {
+    color: #e64545 !important;
+}
+
+.home-2 .fcategory-content:hover .fcategory-title h3 a {
+    color: #e64545 !important;
+}
+
+.home-4 .fcategory-content:hover .fcategory-title h3 a {
+    color: #e64545 !important;
+}
+
+.tabs-categorys-list.title-2 li a.active:after {
+    background: #e64545 !important;
+}
+
+.tabs-categorys-list.title-3 li a.active:after {
+    background: #e64545 none repeat scroll 100% 0 !important;
+}
+
+.home-4 .tabs-categorys-list li a.active:after {
+    background: #e64545 !important;
+}
+
+.home-2 .sinle-product-item .action-links .action-btn:hover {
+    background: #e64545 !important;
+}
+
+.home-3 .sinle-product-item .action-links .action-btn:hover {
+    background: #e64545 !important;
+    color: #333;
+}
+
+.home-4 .sinle-product-item .action-links .action-btn:hover {
+    background: #e64545 !important;
+}
+
+.sinle-product-item .add-to-cart .btn-cart:hover {
+    background: #e64545 none repeat scroll 100% 0 !important;
+}
+
+.home-2 .sinle-product-item .add-to-cart .btn-cart:hover {
+    background: #e64545 none repeat scroll 100% 0 !important;
+}
+
+.home-3 .sinle-product-item .add-to-cart .btn-cart:hover {
+    background: #e64545 none repeat scroll 100% 0 !important;
+    color: #fff !important;
+}
+
+.home-4 .sinle-product-item .add-to-cart .btn-cart:hover {
+    background: #e64545 none repeat scroll 100% 0 !important;
+    color: #fff !important;
+}
+
+.price-box .new-price {
+    color: #e64545 !important;
+}
+
+.home-4 .box-content.newleter-content .subscribe-btn {
+    background: #e64545 !important;
+}
+
+.box-content.newleter-content .subscribe-btn:hover,
+.box-content.newleter-content .subscribe-btn.btn-3:hover {
+    background: #e64545 !important;
+}
+
+.box-content.newleter-content .subscribe-btn.btn-3 {
+    background: #e64545 none repeat scroll 100% 0 !important;
+}
+
+.product-area-style2 .title-style-three.title-3-color .view-all-btn:hover {
+    background: #e64545 !important;
+}
+
+.ui-slider-range {
+    background: #e64545 none repeat scroll 100% 0 !important;
+}
+
+.ui-state-default,
+.ui-widget-content .ui-state-default,
+.ui-widget-header .ui-state-default {
+    background: #e64545 none repeat scroll 100% 0 !important;
+    border: 2px solid #e64545;
+}
+
+.product-layout-list .list-btn-cart:hover {
+    background: #e64545 !important;
+}
+
+.lost-password {
+    color: #e64545 !important;
+}
+
+#top-shopoing-cart .item-text-number {
+    background: #e64545 none repeat scroll 100% 0 !important;
+}
+
+
+.about-corporate-area {
+    background-color: #e64545 !important
+}
+
+
+/*Categoory*/
+.categories-toggler-menu.togoler-style-4 {
+    color: #f0f1f2 !important;
+}
+
+.main-menu-area.sticky-header .container .row li.has-sub a {
+    color: #e64545 !important
+}
+/*Categoory*/
+.top-box-lang ul > li.currency::after {
+    background: #fff none repeat scroll 100% 0 !important;
+}

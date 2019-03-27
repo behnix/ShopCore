@@ -1,0 +1,45 @@
+﻿@using App.Core.Convertors
+@model List<App.Domain.Entities.NoDataBase.CartItem>
+@if (Model != null)
+{
+    <div class="col-lg-3 col-md-3">
+    <div class="header-cart-box">
+        <div id="top-shopoing-cart" class="btn-group">
+            <button class="btn-link shopping-cart dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="ion-ios-cart text-dark"></i>
+                <span class="top-cart-total">
+                    <span class="item-text-number">@Model.Count</span>
+                    <span class="cart-text-items text-dark">سبد خرید</span>
+                </span>
+            </button>
+            <div class="dropdown-menu">
+                <ul class="mini-cart-sub mini-cart-fore">
+                    @foreach (var item in Model)
+                    {
+                        <li class="single-cart">
+                            <div class="cart-img" style="width: 60px;">
+                                <a href="/product/@Html.Raw(item.Product.MetaTitle)"><img src="/assets/products/thumb/@item.Product.Image" alt="@Html.Raw(item.Product.Title)"></a>
+                            </div>
+                            <div class="cart-info">
+                                <a href="/product/@Html.Raw(item.Product.MetaTitle)">@Html.Raw(item.Product.Title)</a>
+                                <p class="cart-quantity">× @item.Quantity</p>
+                                <p class="cart-price">@item.Product.Price.ToPrice() تومان</p>
+                            </div>
+                            <button class="cart-remove" title="Remove"><i class="ion-ios-close-empty"></i></button>
+                        </li>
+                    }
+                    <li class="cart-total-box">
+                        <h5>جمع:<span class="float-right">@ViewBag.total تومان</span></h5>
+                    </li>
+                    <li>
+                        <p class="text-center cart-button">
+                            <a href="/cart">مشاهده سبد</a>
+                            <a href="/pay">پرداخت</a>
+                        </p>
+                    </li>
+                </ul>
+                </div>
+        </div>
+    </div>
+</div>
+}

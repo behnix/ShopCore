@@ -1,0 +1,70 @@
+﻿@page
+@model App.Pages.Admin.ConfigChart.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>ConfigChart</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ConfigChart.Id" />
+            <div class="form-group">
+                <label asp-for="ConfigChart.Name" class="control-label"></label>
+                <input asp-for="ConfigChart.Name" class="form-control" />
+                <span asp-validation-for="ConfigChart.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfigChart.Title" class="control-label"></label>
+                <input asp-for="ConfigChart.Title" class="form-control" />
+                <span asp-validation-for="ConfigChart.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfigChart.Order" class="control-label"></label>
+                <input asp-for="ConfigChart.Order" class="form-control" />
+                <span asp-validation-for="ConfigChart.Order" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfigChart.CategoryId" class="control-label"></label>
+                <select asp-for="ConfigChart.CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
+                <span asp-validation-for="ConfigChart.CategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfigChart.ConfigGroupId" class="control-label"></label>
+                <select asp-for="ConfigChart.ConfigGroupId" class="form-control" asp-items="ViewBag.ConfigGroupId"></select>
+                <span asp-validation-for="ConfigChart.ConfigGroupId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfigChart.FilterType" class="control-label"></label>
+                <input asp-for="ConfigChart.FilterType" class="form-control" />
+                <span asp-validation-for="ConfigChart.FilterType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfigChart.ConfigDescription" class="control-label"></label>
+                <input asp-for="ConfigChart.ConfigDescription" class="form-control" />
+                <span asp-validation-for="ConfigChart.ConfigDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfigChart.ConfigDescriptionComplete" class="control-label"></label>
+                <input asp-for="ConfigChart.ConfigDescriptionComplete" class="form-control" />
+                <span asp-validation-for="ConfigChart.ConfigDescriptionComplete" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,48 @@
+﻿@page
+@model App.Pages.Admin.Help.EditorModel
+@{
+    ViewData["Title"] = "راهنمای استفاده از ویرایشگر";
+    Layout = "_Admin";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-9">
+        <h2>داشبورد</h2>
+        <ol class="breadcrumb">
+            <li class="active">
+                <a href="/admin">خانه</a>
+            </li>
+            <li class="active">
+                <a href="/help/editor">راهنمای استفاده از ویرایشگر</a>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>راهنمای استفاده از ویرایشگر</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            <br />
+                            <br />
+                            <video controls>
+                                <source src="/adminAssets/videos/editor.mp4" type="video/mp4">
+                                Your browser does not support HTML5 video.
+                            </video>
+                            <br />
+                            <br />
+                            <p></p>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

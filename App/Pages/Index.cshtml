@@ -1,0 +1,61 @@
+﻿@page "/"
+@model IndexModel
+@{
+    ViewData["Title"] = Model.Setting.SiteName;
+    Layout = "_Default";
+}
+@await Component.InvokeAsync("SliderComponent")
+<div class="section-row  bg-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                @await Component.InvokeAsync("CategoryLogoInIndexComponent")
+                @await Component.InvokeAsync("MostProductsComponent")
+                @await Component.InvokeAsync("NewProductInCategoryInIndexComponent")
+                <div class="row">
+                    @await Component.InvokeAsync("NewPostInIndexComponent")
+                    <div class="col-lg-4 col-md-12">
+                        <div class="signup-newsletter-wrapper box-module">
+                            <div class="secton-title">
+                                <h2>در خبرنامه ما عضو شوید</h2>
+                            </div>
+                            <div class="product-category-inner">
+                                <label>به منظور اطلاع از آخرین قیمت های و فروش های ویژه سایت کاویان اسپورت می توانید در خبرنامه عضو شده و هر روز از آخرین خبرها و قیمت های ما آگاه شوید.</label>
+                                <div class="box-content newleter-content">
+                                    <form id="subscribe-normal" name="subscribe">
+                                        <input class="subscribe-email" type="text" placeholder="ایمیل خود را وارد کنید ...">
+                                    </form>
+                                    <a class="subscribe-btn" href="#">اشتراک</a>
+                                </div>
+                                <p class="text-dontspam">ما به شما اسپم نخواهیم فرستاد!</p>
+                                <div class="social-follow">
+                                    <div class="secton-title">
+                                        <h2>ما را در شبکه های اجتماعی دنبال کنید</h2>
+                                    </div>
+                                    <ul class="social-link-follow">
+                                        @if (!string.IsNullOrWhiteSpace(Model.Setting.SiteFacebookId))
+                                        {
+                                            <li> <a href="https://facebook.com/@Model.Setting.SiteFacebookId" target="_blank" class="Facebook"><i class="fa fa-facebook"></i></a> </li>
+                                        }
+                                        @if (!string.IsNullOrWhiteSpace(Model.Setting.SiteTelegramId))
+                                        {
+                                            <li> <a href="https://t.me/@Model.Setting.SiteTelegramId" target="_blank" class="telegram"><i class="fa fa-telegram"></i></a> </li>
+                                        }
+                                        @if (!string.IsNullOrWhiteSpace(Model.Setting.SiteInstagramId))
+                                        {
+                                            <li> <a href="https://www.instagram.com/@Model.Setting.SiteInstagramId" target="_blank" class="instagram"><i class="fa fa-instagram"></i></a> </li>
+                                        }
+                                        @if (!string.IsNullOrWhiteSpace(Model.Setting.SiteTwitterId))
+                                        {
+                                            <li> <a href="https://twitter.com/@Model.Setting.SiteTwitterId" target="_blank" class="twitter"><i class="fa fa-twitter"></i></a> </li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

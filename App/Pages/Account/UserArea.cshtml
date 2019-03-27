@@ -1,0 +1,90 @@
+﻿@page "/userArea"
+@using App.Core.Convertors
+@model App.Pages.Account.UserAreaModel
+@{
+    ViewData["Title"] = "ناحیه کاربری";
+}
+
+<div class="breadcrumb-area bg-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ul>
+                    <li class="breadcrumb-item"><a href="/">خانه</a></li>
+                    <li class="breadcrumb-item active">@ViewData["Title"]</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content-wraper bg-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-sm-12 col-12 order-2 order-lg-1">
+                <div class="categories-blog-area mt-60">
+                    <div class="single-categories-1">
+                        <div class="single-categories-blog">
+                            <img src="/assets/avatars/@Model.UserArea.UserAvatar" alt="@Html.Raw(Model.UserArea.FirstName) @Html.Raw(Model.UserArea.LastName)" />
+                            <ul class="text-left my-5">
+                                <li><i class="fa fa-edit"></i> <a href="./EditProfile">ویرایش مشخصات کاربری</a></li>
+                                <li><i class="fa fa-user"></i> <a href="#">تغییر تصویر پروفایل</a></li>
+                                <li><i class="fa fa-key" aria-hidden="true"></i> <a href="#">تغییر کلمه عبور</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9 order-1 order-lg-2">
+                <div class="categories-blog-area mt-60">
+                    <div class="single-categories-1">
+                        <h3 class="blog-categorie-title">ناحیه کاربری</h3>
+                        @if (User.Identity.Name == "behnam" || User.Identity.Name == "Abdalzahra")
+                        {
+                            <div class="row mb-5">
+
+                                <form method="post" class="p-3">
+                                    <a href="/admin" class="btn btn-danger">ورود به کنترل پنل</a>
+                                </form>
+                            </div>
+                        }
+
+                        <h3 class="blog-categorie-title">سفارشات</h3>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="table table-bordered table-responsive">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>ردیف</th>
+                                                <th>شماره فاکتور</th>
+                                                <th>کد رهگیری</th>
+                                                <th>وضعیت</th>
+                                                <th>مبلغ</th>
+                                                <th>تاریخ سفارش</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @{var i = 1;}
+                                            @foreach (var item in Model.Invoice)
+                                            {
+                                            <tr>
+                                                <td>@(i++)</td>
+                                                <td>@item.Id</td>
+                                                <td>@item.RefNum</td>
+                                                <td>@item.State</td>
+                                                <td>@item.Amount.ToPrice() تومان</td>
+                                                <td>@item.FactoredOn.ToLongShamsi()</td>
+                                            </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

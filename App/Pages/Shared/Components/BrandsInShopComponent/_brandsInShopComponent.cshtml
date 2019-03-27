@@ -1,0 +1,24 @@
+﻿@using App.Pages.Admin.Brand
+@model IEnumerable<App.Domain.Entities.Product.Brand>
+@{
+    var selected = ViewBag.selectedBrand as List<int>;
+}
+@if (Model.Count() > 1)
+{
+    <div class="facture-box sidebar-categores-box">
+        <div class="secton-title">
+            <h2>سازنده</h2>
+        </div>
+        <div class="sidebar-categores-inner">
+            <div class="filter-group">
+                @foreach (var brand in Model)
+                {
+                    <div class="pl-3">
+                        <input onchange="changeCommit()" @(selected != null && selected.Any(s => s == brand.Id) ? "checked" : "") type="checkbox" name="selectedBrand" value="@brand.Id">
+                        <label> @Html.Raw(brand.Name) </label>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}

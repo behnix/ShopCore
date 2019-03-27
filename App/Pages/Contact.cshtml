@@ -1,0 +1,76 @@
+﻿@page
+@model ContactModel
+@{
+    ViewData["Title"] = "تماس با ما";
+}
+<div class="breadcrumb-area bg-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ul>
+                    <li class="breadcrumb-item"><a href="/">خانه</a></li>
+                    <li class="breadcrumb-item active">@ViewData["Title"]</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content-wraper">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 col-sm-12">
+                <div class="contact-form">
+                    <div class="contact-title">
+                        <h3>با ما در ارتباط باشید</h3>
+                    </div>
+                    <form id="contact-form" action="email.php" method="POST">
+                        <div class="contact-page-form">
+                            <div class="contact-input">
+                                <div class="contact-inner">
+                                    <input name="name" type="text" placeholder="نام *" id="first-name">
+                                </div>
+                                <div class="contact-inner">
+                                    <input name="lastname" type="text" placeholder="نام خانوادگی *" id="last-name">
+                                </div>
+                                <div class="contact-inner">
+                                    <input type="text" placeholder="ایمیل *" id="email" name="email">
+                                </div>
+                                <div class="contact-inner">
+                                    <input name="subject" type="text" placeholder="موضوع *" id="subject">
+                                </div>
+                                <div class="contact-inner contact-message">
+                                    <textarea name="message" type="text" placeholder="متن پیام *"></textarea>
+                                </div>
+                            </div>
+                            <div class="contact-submit-btn">
+                                <button class="submit-btn" type="submit">ارسال ایمیل</button>
+                                <p class="form-messege"></p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-5 col-sm-12">
+                <div class="contact-infor">
+                    <div class="contact-title">
+                        <h3>تماس با ما</h3>
+                    </div>
+                    <div class="contact-dec">
+                        <p>@Model.Setting.Result.ContactDescription</p>
+                    </div>
+                    <div class="contact-address">
+                        <ul>
+                            <li><i class="fa fa-map-marker"></i>@Model.Setting.Result.SiteAddress</li>
+                            <li><i class="fa fa-phone"></i> <span class="ltr_text">@Model.Setting.Result.SiteTel</span></li>
+                            <li><i class="fa fa-envelope-o"></i> @Model.Setting.Result.SiteEmail</li>
+                        </ul>
+                    </div>
+                    <div class="work-hours">
+                        <h3><strong>ساعات کاری</strong></h3>
+                        <p>@Model.Setting.Result.ContactWorkHour</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

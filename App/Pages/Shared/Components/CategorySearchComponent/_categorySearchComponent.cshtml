@@ -1,0 +1,25 @@
+﻿@using App.Pages.Admin.Category
+@model IEnumerable<App.Domain.Entities.Product.Category>
+<div class="col-lg-6 col-md-6">
+    <div class="top-search-area shearch-fore">
+        <div class="shearch-categories">
+            <form asp-page="/shop" method="get">
+                <div class="search-form-input">
+                    <select id="select" name="selectedCategory" class="nice-select">
+                        <option>تمامی دسته ها</option>
+                        @foreach (var category in Model.Where(c=>c.ParentId ==0))
+                        {
+                            <option disabled>@category.Name</option>
+                            foreach (var sub in Model.Where(c => c.ParentId == category.Id))
+                             {
+                                 <option value="@sub.Id" >@sub.Name</option>
+                             }
+                        }
+                    </select>
+                    <input type="text" placeholder="جستجوی محصول ..." name="filter">
+                    <button class="top-search-btn" type="submit"><i class="ion-ios-search-strong"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,111 @@
+﻿@page
+@model App.Pages.Admin.Setting.ContactPageModel
+
+@{
+    ViewData["Title"] = "تنظیمات سایت";
+    Layout = "_Admin";
+}
+
+
+
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-9">
+        <h2>تنظیمات کلی</h2>
+        <ol class="breadcrumb">
+            <li class="active">
+                <a href="/admin">خانه</a>
+            </li>
+            <li>
+                ویرایش تنظیمات کلی
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>ویرایش تنظیمات کلی</h5>
+                </div>
+                <div class="ibox-content">
+                    <form method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="Setting.SettingId" />
+                        <input type="hidden" asp-for="Setting.SiteName" />
+                        <input type="hidden" asp-for="Setting.SiteDescription" />
+                        <input type="hidden" asp-for="Setting.SiteEmail" />
+                        <input type="hidden" asp-for="Setting.SiteEmailPassword" />
+                        <input type="hidden" asp-for="Setting.SiteSmtp" />
+                        <input type="hidden" asp-for="Setting.SiteSmsNumber" />
+                        <input type="hidden" asp-for="Setting.SiteSmsSigniture" />
+                        <input type="hidden" asp-for="Setting.SiteTelegramId" />
+                        <input type="hidden" asp-for="Setting.SiteInstagramId" />
+                        <input type="hidden" asp-for="Setting.SiteTwitterId" />
+                        <input type="hidden" asp-for="Setting.SiteFacebookId" />
+                        <input type="hidden" asp-for="Setting.SiteCopyRightText" />
+                        <input type="hidden" asp-for="Setting.AboutUs" />
+                        <input type="hidden" asp-for="Setting.Index" />
+                        <input type="hidden" asp-for="Setting.Slogan1" />
+                        <input type="hidden" asp-for="Setting.Slogan2" />
+                        <input type="hidden" asp-for="Setting.Service1" />
+                        <input type="hidden" asp-for="Setting.Service1Icon" />
+                        <input type="hidden" asp-for="Setting.Service1Description" />
+                        <input type="hidden" asp-for="Setting.Service2" />
+                        <input type="hidden" asp-for="Setting.Service2Icon" />
+                        <input type="hidden" asp-for="Setting.Service2Description" />
+                        <input type="hidden" asp-for="Setting.Service3" />
+                        <input type="hidden" asp-for="Setting.Service3Icon" />
+                        <input type="hidden" asp-for="Setting.Service3Description" />
+                        <input type="hidden" asp-for="Setting.Service4" />
+                        <input type="hidden" asp-for="Setting.Service4Icon" />
+                        <input type="hidden" asp-for="Setting.Service4Description" />
+                        <input type="hidden" asp-for="Setting.FaqTitle" />
+                        <input type="hidden" asp-for="Setting.FaqDescription" />
+                        <input type="hidden" asp-for="Setting.FaqText" />
+                        <input type="hidden" asp-for="Setting.AboutUsTitle" />
+                        <input type="hidden" asp-for="Setting.AboutUsDescription" />
+                        <input type="hidden" asp-for="Setting.SiteNameInEnglish" />
+                        <input type="hidden" asp-for="Setting.QuantityPostInIndex" />
+                        <input type="hidden" asp-for="Setting.SmtpPort" />
+
+                        <div class="form-group">
+                            <label asp-for="Setting.ContactTitle" class="control-label"></label>
+                            <input asp-for="Setting.ContactTitle" class="form-control" />
+                            <span asp-validation-for="Setting.ContactTitle" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Setting.ContactDescription" class="control-label"></label>
+                            <textarea asp-for="Setting.ContactDescription" rows="3" class="form-control"></textarea>
+                            <span asp-validation-for="Setting.ContactDescription" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Setting.SiteTel" class="control-label"></label>
+                            <input asp-for="Setting.SiteTel" class="form-control" />
+                            <span asp-validation-for="Setting.SiteTel" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Setting.ContactWorkHour" class="control-label"></label>
+                            <input asp-for="Setting.ContactWorkHour" class="form-control" />
+                            <span asp-validation-for="Setting.ContactWorkHour" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Setting.SiteAddress" class="control-label"></label>
+                            <input asp-for="Setting.SiteAddress" class="form-control" />
+                            <span asp-validation-for="Setting.SiteAddress" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="ثبت تغییرات" class="btn btn-primary btn-sm" />
+                            <a asp-page="Index" class="btn btn-danger btn-sm">بازگشت</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

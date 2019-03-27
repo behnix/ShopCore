@@ -1,0 +1,33 @@
+﻿@page "/confirmEmail"
+@model App.Pages.Account.ConfirmEmailModel
+@{
+    ViewData["Title"] = "ارسال تائیدیه ایمیل";
+}
+
+<div class="breadcrumb-area bg-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ul>
+                    <li class="breadcrumb-item"><a href="/">خانه</a></li>
+                    <li class="breadcrumb-item active">@ViewData["Title"]</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content-wraper mt-60">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="about-info-wrapper">
+                    <h2>@ViewData["Title"]</h2>
+                    <p>حساب کاربری شما با موفقیت فعال شد. برای تکمیل مشخصات خود میتوانید به ناحیه کاربری مراجعه نمائید</p>
+                    
+                    <a href="/userarea" class="text-success">ناحیه کاربری</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

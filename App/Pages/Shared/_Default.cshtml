@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <link rel="shortcut icon" type="image/png" href="/favicon.ico">
+    @await Component.InvokeAsync("LayoutComponent")
+    <partial name="_Styles" />
+    @await Component.InvokeAsync("ThemeComponent")
+    <script src="~/js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+<body>
+    <!--[if lt IE 8]>
+        <p class="browserupgrade">مرورگر شما <strong>قدیمی</strong> است. لطفا مرورگر خود را <a href="http://browsehappy.com/">به روز رسانی نمایید</a> تا تجربه بهتری داشته باشید. با تشکر</p>
+    <![endif]-->
+    <div class="wrapper home-4">
+        <header>
+            <div class="header-area bg-white">
+                <div class="container">
+                    <div class="row">
+                        @await Component.InvokeAsync("LogoComponent")
+                        @await Component.InvokeAsync("CategorySearchComponent")
+                        @await Component.InvokeAsync("CartComponent")
+                    </div>
+                </div>
+            </div>
+            <div class="main-menu-area sticky-header bg-white">
+                <div class="container">
+                    <div class="row">
+                        @await Component.InvokeAsync("CategoryMenuComponent")
+                        <div class="col-lg-6">
+                            <div class="main-menu d-none d-lg-block">
+                                <nav>
+                                    <ul>
+                                        <li><a href="/">خانه</a></li>
+                                        <li><a href="/blog">بلاگ</a></li>
+                                        <li><a href="/shop">فروشگاه</a></li>
+                                        <li><a href="/about">درباره ما</a></li>
+                                        <li><a href="/contact">تماس با ما</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="top-box-lang top-box-lang-4 text-right">
+                                <ul>
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        <li class="currency">
+                                            <div class="btn-group">
+                                                <a href="/userarea" class="btn-link">
+                                                    <i class="fa fa-user-circle-o" aria-hidden="true"></i> @User.Claims.ToList()[4].Value @User.Claims.ToList()[5].Value
+                                                </a>
+                                            </div>
+                                        </li>
+                                        <li class="language">
+                                            <div class="btn-group">
+                                                <a href="/logout" class="btn-link">
+                                                    <i class="fa fa-sign-out" aria-hidden="true"></i> خروج
+                                                </a>
+                                            </div>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="currency">
+                                            <div class="btn-group">
+                                                <a href="/login" class="btn-link">
+                                                    <i class="fa fa-sign-in" aria-hidden="true"></i> ورود به سایت
+                                                </a>
+                                            </div>
+                                        </li>
+                                        <li class="language">
+                                            <div class="btn-group">
+                                                <a href="/register" class="btn-link">
+                                                    <i class="fa fa-user-circle-o" aria-hidden="true"></i> ثبت نام
+                                                </a>
+                                            </div>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mobile-menu-area d-block d-lg-none">
+                        <div class="mobile-menu">
+                            <nav id="mobile-menu-active">
+                                <ul>
+                                    <li><a href="/">خانه</a></li>
+                                    <li><a href="/blog">بلاگ</a></li>
+                                    <li><a href="/shop">فروشگاه</a></li>
+                                    <li><a href="/about">درباره ما</a></li>
+                                    <li><a href="/contact">تماس با ما</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        @await Component.InvokeAsync("CategoryMenuMobileComponent")
+        @RenderBody()
+        @await Component.InvokeAsync("FooterComponent")
+    </div>
+
+    <partial name="_Scripts" />
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

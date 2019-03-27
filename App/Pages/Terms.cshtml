@@ -1,0 +1,32 @@
+﻿@page
+@model App.Pages.TermsModel
+
+@{
+    ViewData["Title"] = Model.Setting.TermsTitle;
+    ViewData["Description"] = Model.Setting.TermsDescription;
+}
+
+<div class="breadcrumb-area bg-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ul>
+                    <li class="breadcrumb-item"><a href="/">خانه</a></li>
+                    <li class="breadcrumb-item active">@ViewData["Title"]</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content-wraper mt-60">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="about-info-wrapper">
+                    <h2>@Model.Setting.TermsTitle</h2>
+                    <p>@Html.Raw(Model.Setting.Terms)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

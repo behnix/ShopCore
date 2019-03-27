@@ -1,0 +1,74 @@
+﻿@page
+@model App.Pages.Admin.ConfigChart.IndexModel
+
+@{
+    ViewData["Title"] = "مدیریت مشخصه ها";
+    Layout = "_Admin";
+}
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-9">
+        <h2>@ViewData["Title"]</h2>
+        <ol class="breadcrumb">
+            <li class="active">
+                <a href="/admin">خانه</a>
+            </li>
+            <li>
+                @ViewData["Title"]
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="row" style="padding:0 15px">
+                    @foreach (var parentCat in Model.Categories.Where(c=>c.ParentId == 0).ToList())
+                    {
+                    <div class="col-12 col-md-3" style="background-color: white; border: 5px solid #f3f3f3;padding:10px 15px">
+                        <h3>@parentCat.Name</h3>
+                        @foreach (var cat in Model.Categories.Where(c=>c.ParentId == parentCat.Id).ToList())
+                        {
+                            <h4 style="padding: 5px 10px">@cat.Name <a asp-page="../ConfigGroup/Create" asp-route-id="@cat.Id"><i class="fa fa-plus-square" aria-hidden="true"></i></a></h4>
+                            <ul>
+                                @foreach (var grp in Model.ConfigGroups.Where(cg => cg.CategoryId == cat.Id).OrderBy(cg => cg.Order))
+                                {
+                                    <li style="margin-bottom: 10px">
+                                        @grp.Title <a asp-page="./Create" asp-route-id="@cat.Id" asp-route-groupId="@grp.Id"><i class="fa fa-plus-circle" aria-hidden="true"></i></a> <a asp-page="../ConfigGroup/Edit" asp-route-id="@grp.Id"><i class="fa fa-edit"></i></a> <a asp-page="../ConfigGroup/Delete" asp-route-id="@grp.Id"><i class="fa fa-trash"></i></a>
+                                        <ul class="editConfig">
+                                            @foreach (var config in Model.ConfigCharts.Where(cc => cc.ConfigGroupId == grp.Id && cc.CategoryId == grp.CategoryId).OrderBy(cc => cc.Order))
+                                            {
+                                                <li>
+                                                    <div class="row">
+                                                        <div class="col-md-5 text-left">@config.Title</div>
+                                                        <div class="col-md-1 text-center">
+                                                            <a asp-page="./Edit" asp-route-id="@config.Id"><i class="fa fa-edit"></i></a>
+                                                        </div>
+                                                        <div class="col-md-1 text-center upShift">
+                                                            <form asp-page-handler="edit" method="post" asp-route-method="ShiftToUp" asp-route-configId="@config.Id">
+                                                                <button class="btn btn-link"><i class="fa fa-chevron-up"></i></button>
+                                                            </form>
+                                                        </div>
+                                                        <div class="col-md-1 text-center downShift">
+                                                            <form asp-page-handler="edit" method="post" asp-route-method="ShiftToDown" asp-route-configId="@config.Id">
+                                                                <button class="btn btn-link"><i class="fa fa-chevron-down"></i></button>
+                                                            </form>
+                                                        </div>
+                                                        <div class="col-md-1 text-center">
+                                                            <a asp-page="./Delete" asp-route-id="@config.Id"><i class="fa fa-trash"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            }
+                                        </ul>
+                                    </li>
+                                }
+                            </ul>
+                        }
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

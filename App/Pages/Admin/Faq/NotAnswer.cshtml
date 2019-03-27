@@ -1,0 +1,66 @@
+﻿@page
+@model App.Pages.Admin.Faq.NotAnswerModel
+
+@{
+    ViewData["Title"] = "سوالات پاسخ داده نشده";
+    Layout = "_Admin";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-9">
+        <h2>سوالات پاسخ داده نشده</h2>
+        <ol class="breadcrumb">
+            <li class="active">
+                <a href="/admin">خانه</a>
+            </li>
+            <li>
+                لیست سوالات پاسخ داده نشده
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>سوالات پاسخ داده نشده</h5>
+                </div>
+                <div class="ibox-content">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>
+                                    #
+                                </th>
+                                <th>
+                                    عنوان سوال
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{ var i = 1;}
+                            @foreach (var item in Model.Faq)
+                            {
+                                <tr>
+                                    <td class="pt-20">
+                                        @(i++)
+                                    </td>
+                                    <td class="pt-20">
+                                        @Html.DisplayFor(modelItem => item.FaqQuestion)
+                                    </td>
+                                    <td class="pt-15">
+                                        <a asp-page="./Edit" asp-route-id="@item.FaqId" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i> ویرایش</a>
+                                        <a asp-page="./Delete" asp-route-id="@item.FaqId" class="btn btn-danger btn-sm"><i class="fa fa-times"></i> حذف</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

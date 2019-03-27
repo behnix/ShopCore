@@ -1,0 +1,61 @@
+﻿@page
+@model App.Pages.Admin.Comment.EditModel
+
+@{
+    ViewData["Title"] = "ویرایش دیدگاه";
+    Layout = "~/Pages/Shared/_Admin.cshtml";
+}
+
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-9">
+        <h2>ویرایش دیدگاه</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="/admin">خانه</a>
+            </li>
+            <li>
+                <a href="/admin/Product/">مدیریت محصولات</a>
+            </li>
+            <li class="active">
+                @ViewData["Title"]
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>@ViewData["Title"]</h5>
+                </div>
+                <div class="ibox-content">
+                    <form method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="Comment.Id" />
+                        <input type="hidden" asp-for="Comment.User" />
+                        <input type="hidden" asp-for="Comment.UserId" />
+                        <input type="hidden" asp-for="Comment.IsConfirmed" />
+                        <input type="hidden" asp-for="Comment.CommentedOn" />
+                        <input type="hidden" asp-for="Comment.ProductId" />
+                        <div class="form-group">
+                            <label asp-for="Comment.Content" class="control-label"></label>
+                            <textarea asp-for="Comment.Content" class="form-control" rows="10"></textarea>
+                            <span asp-validation-for="Comment.Content" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="ثبت تغییرات" class="btn btn-primary btn-sm" />
+                            <a asp-page="Index" class="btn btn-danger btn-sm">بازگشت</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

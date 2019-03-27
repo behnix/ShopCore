@@ -1,0 +1,31 @@
+﻿@page "/verificationAccount"
+@model App.Pages.Account.VerificationAccountModel
+@{
+    ViewData["Title"] = "ارسال لینک فعالسازی";
+}
+
+<div class="breadcrumb-area bg-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ul>
+                    <li class="breadcrumb-item"><a href="/">خانه</a></li>
+                    <li class="breadcrumb-item active">@ViewData["Title"]</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content-wraper mt-60">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="about-info-wrapper">
+                    <h2>@ViewData["Title"]</h2>
+                    <p>کاربر گرامی لینک فعالسازی حساب کاربری شما به آدرس ایمیلتان ارسال شد. برای فعالسازی حساب کاربری خود روی لینک ارسال شده کلیک نمائید.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,135 @@
+﻿@page
+@model App.Pages.Admin.Product.ConfigDetailModel
+
+@{
+    ViewData["Title"] = "ConfigDetail";
+    Layout = "~/Pages/Shared/_Admin.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-9">
+        <h2>افزودن سوال جدید</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="/admin">خانه</a>
+            </li>
+            <li>
+                <a href="/admin/faq/">سوالات متداول</a>
+            </li>
+            <li class="active">
+                افزودن پست جدید
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>افزودن سوال</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="ibox-content">
+                        <div class="form-horizontal">
+                            <div class="hr-line-dashed"></div>
+                            @{var i = 0; }
+                            @foreach (var grp in Model.ConfigGroups)
+                            {
+                                <h4 class="text-success">@grp.Title</h4>
+
+                                foreach (var item in Model.ConfigDetails.Where(cd => cd.ConfigGroupId == grp.Id && cd.ConfigChart.ConfigGroupId == grp.Id && cd.ConfigChart.CategoryId == ViewBag.CategoryId))
+                                {
+
+                                    <form method="post">
+                                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                        <input type="hidden" class="Id" asp-for="ConfigDetail.Id" value="@item.Id" />
+                                        <input type="hidden" class="ConfigChartId" asp-for="ConfigDetail.ConfigChartId" value="@item.ConfigChartId" />
+                                        <input type="hidden" class="ConfigGroupId" asp-for="ConfigDetail.ConfigGroupId" value="@item.ConfigGroupId" />
+                                        <input type="hidden" class="ProductId" asp-for="ConfigDetail.ProductId" value="@item.ProductId" />
+                                        <div class="form-group">
+                                            <label class="control-label col-md-2">@item.ConfigChart.Title</label>
+                                            <div class="col-md-8">
+                                                <input class="form-control Value" asp-for="ConfigDetail.Value" value="@item.Value">
+                                            </div>
+                                            <div class="col-md-1">
+                                                <a class="btn btn-danger updateBtn" style="display:none" itemscope="@item.ConfigChartId">به روز رسانی</a>
+                                            </div>
+                                        </div>
+                                    </form>
+                                }
+                            }
+
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-2">
+                                    <a class="btn btn-primary btnDone">ثبت کانفیگ</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section styles{
+    <link href="/css/noty.css" rel="stylesheet" />
+}
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="/js/noty.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
+    <script src="/js/jquery.form.min.js"></script>
+    <script src="/js/jquery.noty.packaged.min.js"></script>
+    <script>
+        $('.btnDone').on('click', function () {
+            $(".updateBtn").each(function (index) {
+                jQuery('.updateBtn')[index].click();
+            });
+            var n = noty({
+                text: 'به روز رسانی با موفقیت انجام شد.',
+                type: 'success',
+                dismissQueue: true,
+                layout: 'center',
+                modal: true,
+                theme: 'relax',
+                closeWith: ['button'],
+                maxVisible: 10,
+                animation: {
+                    open: 'fadeIn',
+                    close: 'fadeOut',
+                    easing: 'swing',
+                    speed: 50
+                },
+            });
+        });
+        $('.updateBtn').on('click', function () {
+            var thisBtn = $(this);
+            var form = $(this).parent().parent().parent();
+            var Id = $(form).find(".Id").val();
+            var Value = $(form).find(".Value").val();
+            var ProductId = $(form).find(".ProductId").val();
+            var ConfigGroupId = $(form).find(".ConfigGroupId").val();
+            var ConfigChartId = $(form).find(".ConfigChartId").val();
+            $(thisBtn).removeClass("btn-danger").addClass("btn-warning").html("<i class='fa fa-spinner fa-spin' aria-hidden='true'></i> در حال بروز رسانی");
+            var configDetail = {
+                id: Id,
+                productId: ProductId,
+                configChartId: ConfigChartId,
+                configGroupId: ConfigGroupId,
+                value: Value
+            }
+            return $.ajax({
+                url: '/manage/UpdateConfigDetails/',
+                dataType: 'json',
+                method: 'get',
+                data: configDetail,
+            }).done(function (response) {
+                $(thisBtn).removeClass("btn-warning").addClass("btn-info").html("به روز رسانی انجام شد.").delay("slow").removeClass("btn-info").addClass("btn-danger").html("به روز رسانی مجدد");
+            }).fail(function () {
+            });
+        });
+    </script>
+}

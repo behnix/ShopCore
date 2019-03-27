@@ -1,0 +1,114 @@
+﻿@page
+@using App.Core.Convertors
+@model App.Pages.BlogModel
+
+@{
+    ViewData["Title"] = "بلاگ";
+}
+<div class="breadcrumb-area bg-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ul>
+                    <li class="breadcrumb-item"><a href="/">خانه</a></li>
+                    <li class="breadcrumb-item active">@ViewData["Title"]</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content-wraper bg-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-sm-12 col-12 order-2 order-lg-1">
+                <div class="categories-blog-area mt-60">
+                    @await Component.InvokeAsync("GroupComponent")
+                    <div class="single-categories-1 blog-search">
+                        <h3 class="blog-categorie-title">جستجو</h3>
+                        <form action="#" class="blog-search-form">
+                            <div class="form-input">
+                                <input type="text" class="input-text" placeholder="جستجو ...">
+                                <button type="submit" class="blog-search-button"><i class="fa fa-search"></i></button>
+                            </div>
+                        </form>
+                    </div>
+                    @await Component.InvokeAsync("NewPostComponent")
+                    <div class="single-categories-1">
+                        <h3 class="blog-categorie-title">آرشیو بلاگ</h3>
+                        <div class="single-categories-blog">
+                            <ul>
+                                <li><a href="#">شهریور 1397</a> <span>(1)</span></li>
+                                <li><a href="#">مرداد 1397 <span>(1)</span></a></li>
+                                <li><a href="#">تیر 1397 <span>(2)</span></a></li>
+                                <li><a href="#">خرداد 1397 <span>(1)</span></a></li>
+                                <li><a href="#">اردیبهشت 1397 <span>(1)</span></a></li>
+                                <li><a href="#">فروردین 1397 <span>(1)</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    @await Component.InvokeAsync("PostTagComponent")
+                </div>
+            </div>
+            <div class="col-lg-9 col-sm-12 col-12 order-1 order-lg-2">
+                <div class="main-blog-wrap mt-60">
+                    @foreach (var post in Model.Post)
+                    {<div class="single-blog-area">
+                            <div class="post-category">
+                                <ul>
+                                    @foreach (var tag in post.PostTags)
+                                    {
+                                        <li><a href="#">@Html.Raw(tag.Tag.TagTitle)</a></li>
+                                    }
+                                </ul>
+                            </div>
+                            <div class="blog-titel 	blog-image">
+                                <h1><a href="/a/@post.ShortUrl">@Html.Raw(post.PostTitle)</a></h1>
+                            </div>
+                            <span class="post-author">
+                                <span class="posted-by">ارسال شده توسط </span>@Html.Raw(post.User.FirstName) @Html.Raw(post.User.LastName)
+                            </span>
+                            <span class="post-separator"> | </span>
+                            <span class="post-date">@Html.Raw(post.PostCreationDate.ToLongShamsiWithWeek())</span>
+
+                            <div class="post-thumbnail">
+                                <a href="blog-details.html">
+                                    <img src="/assets/posts/image/@post.PostImage" alt="">
+                                </a>
+                            </div>
+                            <div class="postinfo-wrapper">
+                                <p class="mb-30">@Html.Raw(post.PostDescription)</p>
+                                <a href="/post/@post.PostId" class="readmore button">بیشتر بخوانید</a>
+                            </div>
+                            <div class="social-comment">
+                                <div class="social-sharing">
+                                    <h3 class="social-title">به اشتراک گذاری این مطلب</h3>
+                                    <ul class="social-icons">
+                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-telegram"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                    </ul>
+                                </div>
+                                <a href="#" class="blog-comment">3 دیدگاه</a>
+                            </div>
+                        </div>
+                    }
+                    <div class="paginatoin-area">
+                        <div class="row">
+                            <div class="col">
+                                <ul class="pagination-box">
+                                    <li><a class="Previous" href="#"> <i class="fa fa-angle-double-right"></i> </a></li>
+                                    <li><a class="active" href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a class="Next" href="#"> <i class="fa fa-angle-double-left"></i> </a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

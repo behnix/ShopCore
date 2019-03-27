@@ -1,0 +1,43 @@
+﻿@using App.Pages.Admin.Category
+@model IEnumerable<App.Domain.Entities.Product.Category>
+<div class="featured-categories-area box-module">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="secton-title">
+                <h2> دسته بندی های کلی</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 owl-container">
+            <div class="feategory-active owl-carousel">
+                @foreach (var category in Model.Where(c=>c.ParentId == 0))
+                {
+                    var categories = "";
+                    var url = "";
+                    foreach (var sub in Model.Where(c=>c.ParentId == category.Id))
+                    {
+                        categories += "selectedCategory=" + sub.Id + "&";
+                    }
+                    if (categories.Length>17)
+                    {
+                        categories = categories.Substring(0, categories.Length - 1);
+                        url = "/shop?" + categories;
+                    }
+                    else
+                    {
+                        url = "#";
+                    }
+                    <div class="fcategory-content">
+                        <div class="fcategory-image">
+                            <a href="@url"><img src="/assets/categories/thumb/@category.CategoryImage" alt="@Html.Raw(category.Name)"></a>
+                        </div>
+                        <div class="fcategory-title">
+                            <h3><a href="@url">@Html.Raw(category.Name)</a></h3>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

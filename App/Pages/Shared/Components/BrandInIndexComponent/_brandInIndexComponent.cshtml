@@ -1,0 +1,14 @@
+﻿@model IEnumerable<App.Domain.Entities.Product.Brand>
+@if (Model.Any())
+{
+    <div class="our-brand-area box-module">
+        <div class="brand-active owl-carousel">
+            @foreach (var brand in Model)
+            {
+                <div class="single-brand-itme">
+                    <a href="#"><img src="/assets/brands/@brand.Logo" alt="@brand.Name"></a>
+                </div>
+            }
+        </div>
+    </div>
+}

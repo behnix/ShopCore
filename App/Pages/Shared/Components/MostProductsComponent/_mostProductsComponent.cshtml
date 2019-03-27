@@ -1,0 +1,131 @@
+﻿@using App.Core.Convertors
+@model App.DTOs.MostProductsViewModel
+<div class="product-area box-module">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="tabs-categorys-list secton-title">
+                <ul class="nav" role="tablist">
+                    <li role="presentation" class="active"><a href="#new-arrivals" aria-controls="new-arrivals" role="tab" data-toggle="tab">جدید ترین ها</a></li>
+                    <li role="presentation"><a href="#best-sellers" aria-controls="best-sellers" role="tab" data-toggle="tab">پرفروش ها</a></li>
+                    <li role="presentation"><a href="#on-sellers" aria-controls="on-sellers" role="tab" data-toggle="tab">پربازدیدترین ها</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="new-arrivals">
+            <div class="product-wrapper">
+                <div class="row">
+                    <div class="prodict-active owl-carousel">
+                        @foreach (var product in Model.MostNewProducs)
+                        {
+                            <div class="col-lg-3">
+                                <div class="sinle-product-item">
+                                    <div class="product-thumb">
+                                        <a href="/product/@product.MetaTitle">
+                                            <img class="primary-image" src="/assets/products/thumb/@product.Image" alt="@product.Title">
+                                        </a>
+                                        <div class="add-to-cart">
+                                            <a class="btn-cart" href="/AddToCart/@product.ProductId"><span> افزودن به سبد </span></a>
+                                        </div>
+                                    </div>
+                                    <div class="product-info">
+                                        <div class="rating-box">
+                                            <ul class="rating d-flex">
+                                                <li><i class="ion-ios-star"></i></li>
+                                                <li><i class="ion-ios-star"></i></li>
+                                                <li><i class="ion-ios-star"></i></li>
+                                                <li><i class="ion-android-star-outline"></i></li>
+                                                <li><i class="ion-android-star-outline"></i></li>
+                                            </ul>
+                                        </div>
+                                        <h4 class="product-name"><a href="/product/@product.MetaTitle">@product.Title</a></h4>
+                                        <div class="price-box">
+                                            <span class="new-price">@product.Price.ToPrice() تومان</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="best-sellers">
+            <div class="product-wrapper">
+                <div class="row">
+                    <div class="prodict-active owl-carousel">
+                        @foreach (var product in Model.MostSalesProducs)
+                        {
+                        <div class="col-lg-3">
+                            <div class="sinle-product-item">
+                                <div class="product-thumb">
+                                    <a href="/product/@product.MetaTitle">
+                                        <img class="primary-image" src="/assets/products/thumb/@product.Image" alt="@product.Title">
+                                    </a>
+                                    <div class="add-to-cart">
+                                        <a class="btn-cart" href="#"><span> افزودن به سبد </span></a>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <div class="rating-box">
+                                        <ul class="rating d-flex">
+                                            <li><i class="ion-ios-star"></i></li>
+                                            <li><i class="ion-ios-star"></i></li>
+                                            <li><i class="ion-ios-star"></i></li>
+                                            <li><i class="ion-android-star-outline"></i></li>
+                                            <li><i class="ion-android-star-outline"></i></li>
+                                        </ul>
+                                    </div>
+                                    <h4 class="product-name"><a href="/product/@product.MetaTitle">@product.Title</a></h4>
+                                    <div class="price-box">
+                                        <span class="new-price">@product.Price.ToPrice() تومان</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="on-sellers">
+            <div class="product-wrapper">
+                <div class="row">
+                    <div class="prodict-active owl-carousel">
+                        @foreach (var product in Model.MostVisitProducs)
+                        {
+                        <div class="col-lg-3">
+                            <div class="sinle-product-item">
+                                <div class="product-thumb">
+                                    <a href="/product/@product.MetaTitle">
+                                        <img class="primary-image" src="/assets/products/thumb/@product.Image" alt="@product.Title">
+                                    </a>
+                                    <div class="add-to-cart">
+                                        <a class="btn-cart" href="#"><span> افزودن به سبد </span></a>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <div class="rating-box">
+                                        <ul class="rating d-flex">
+                                            <li><i class="ion-ios-star"></i></li>
+                                            <li><i class="ion-ios-star"></i></li>
+                                            <li><i class="ion-ios-star"></i></li>
+                                            <li><i class="ion-android-star-outline"></i></li>
+                                            <li><i class="ion-android-star-outline"></i></li>
+                                        </ul>
+                                    </div>
+                                    <h4 class="product-name"><a href="/product/@product.MetaTitle">@product.Title</a></h4>
+                                    <div class="price-box">
+                                        <span class="new-price">@product.Price.ToPrice() تومان</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,124 @@
+﻿@page "/pay/{sessionId}"
+@using App.Core.Convertors
+@model App.Pages.PayModel
+@{
+    ViewData["Title"] = "نمایش فاکتور";
+}
+
+<div class="breadcrumb-area bg-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ul>
+                    <li class="breadcrumb-item"><a href="/">خانه</a></li>
+                    <li class="breadcrumb-item active">@ViewData["Title"]</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content-wraper bg-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6">
+                <form action="#" class="cart-table mt-60">
+                    <div class="table-content table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="plantmore-product-thumbnail">تصاویر</th>
+                                    <th class="cart-product-name">محصول</th>
+                                    <th class="plantmore-product-price">واحد قیمت</th>
+                                    <th class="plantmore-product-quantity">تعداد</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.InvoiceDetails)
+                                {
+                                    <tr>
+                                        <td class="plantmore-product-thumbnail"><a href="#"><img src="/assets/products/thumb/@item.Product.Image" alt=""></a></td>
+                                        <td class="plantmore-product-name"><a href="/product/@item.Product.MetaTitle">@item.Product.Title</a></td>
+                                        <td class="plantmore-product-price"><span class="amount">@item.Product.Price.ToPrice() تومان</span></td>
+                                        <td class="plantmore-product-quantity"><span class="amount">@item.Quantity عدد</span></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6">
+                <div class="table-content mt-60">
+                    <table class="table">
+                        <tr>
+                            <td class="px-4">
+                                <h3>مشخصات خریدار</h3>
+                                <form method="post">
+                                    <input asp-for="Invoice.Id" type="hidden" value="@Model.Invoice.Id" />
+                                    <input asp-for="Invoice.SessionId" type="hidden" value="@Model.Invoice.SessionId" />
+                                    <input asp-for="Invoice.FactoredOn" type="hidden" value="@Model.Invoice.FactoredOn" />
+                                    <input asp-for="Invoice.CId" type="hidden" value="@Model.Invoice.CId" />
+                                    <input asp-for="Invoice.EconomyCode" type="hidden" value="@Model.Invoice.EconomyCode" />
+                                    <input asp-for="Invoice.Name" type="hidden" value="@Model.Invoice.Name" />
+                                    <input asp-for="Invoice.NationCode" type="hidden" value="@Model.Invoice.NationCode" />
+                                    <input asp-for="Invoice.IsOfficial" type="hidden" value="@Model.Invoice.IsOfficial" />
+                                    <input asp-for="Invoice.MessageSent" type="hidden" value="@Model.Invoice.MessageSent" />
+                                    <input asp-for="Invoice.Purchased" type="hidden" value="@Model.Invoice.Purchased" />
+                                    <input asp-for="Invoice.Transported" type="hidden" value="@Model.Invoice.Transported" />
+                                    <input asp-for="Invoice.RefNum" type="hidden" value="@Model.Invoice.RefNum" />
+                                    <input asp-for="Invoice.SecurePan" type="hidden" value="@Model.Invoice.SecurePan" />
+                                    <input asp-for="Invoice.State" type="hidden" value="@Model.Invoice.State" />
+                                    <input asp-for="Invoice.StateCode" type="hidden" value="@Model.Invoice.StateCode" />
+                                    <input asp-for="Invoice.TransactionNo" type="hidden" value="@Model.Invoice.Transported" />
+                                    <input asp-for="Invoice.UserId" type="hidden" value="@Model.Invoice.UserId" />
+                                    <input asp-for="Invoice.ZipCode" type="hidden" value="@Model.Invoice.ZipCode" />
+                                    <input asp-for="Invoice.Amount" type="hidden" value="@Model.Invoice.Amount" />
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        <div class="form-group">
+                                            <input class="form-control" asp-for="Invoice.CostumerName" type="text" value="@Model.CurrentUser.FirstName @Model.CurrentUser.LastName" placeholder="نام و نام خانوادگی" readonly="readonly">
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-control" asp-for="Invoice.CostumerEmail" type="text" value="@Model.CurrentUser.Email" placeholder="ایمیل" readonly="readonly">
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-control" asp-for="Invoice.CostumerPhone" type="text" value="@Model.CurrentUser.PhoneNumber" placeholder="تلفن تماس">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" asp-for="Invoice.CostumerAddress" placeholder="آدرس" value="@Html.Raw(Model.CurrentUser.Address)" rows="3" />
+
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="form-group">
+                                            <input class="form-control" asp-for="Invoice.CostumerName" type="text" value="" placeholder="نام و نام خانوادگی">
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-control" asp-for="Invoice.CostumerEmail" type="text" value="" placeholder="ایمیل">
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-control" asp-for="Invoice.CostumerPhone" type="text" value="" placeholder="تلفن تماس">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" asp-for="Invoice.CostumerAddress" placeholder="آدرس" value="" />
+                                        </div>
+                                    }
+                                    <div class="form-group my-4">
+                                        <h3 class="h5 text-danger font-weight-bold"> مبلغ قابل پرداخت: @Model.Invoice.Amount.ToPrice() تومان</h3>
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="btn btn-success text-white" type="submit" value="همینک پرداخت کنید" />
+                                        @ViewBag.Message
+                                    </div>
+                                </form>
+                            </td>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="about-info-wrapper py-5">
+        </div>
+    </div>
+</div>
+

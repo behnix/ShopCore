@@ -1,0 +1,99 @@
+﻿@page "/post/{titleInBrowser}"
+@using App.Core.Convertors
+@model App.Pages.PostModel
+
+@{
+    ViewData["Title"] = Html.Raw(TextConvertor.ReplaceLetters(Model.Post.PostTitleInBrowser, '-', ' '));
+}
+
+<div class="breadcrumb-area bg-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="breadcrumb-list">
+                    <li class="breadcrumb-item"><a href="index.html">خانه</a></li>
+                    <li class="breadcrumb-item">بلاگ</li>
+                    <li class="breadcrumb-item active">@Model.Post.PostTitle</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content-wraper bg-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9 col-sm-12 col-12 order-1 order-lg-2">
+                <div class="main-blog-wrap mt-60">
+                    <div class="single-blog-area">
+                        <div class="post-category">
+                            <ul>
+                                @*@foreach (var tag in Model.Post.PostTags)
+                                {
+                                    <li><a href="#">@Html.Raw(tag.Tag.TagTitle)</a></li>
+                                }*@
+                            </ul>
+                        </div>
+                        <div class="blog-titel 	blog-image">
+                            <h1><a href="/a/@Model.Post.ShortUrl">@Html.Raw(Model.Post.PostTitle)</a></h1>
+                        </div>
+                        <span class="post-author">
+                            <span class="posted-by">ارسال شده توسط </span>@Html.Raw(Model.Post.User.FirstName) @Html.Raw(Model.Post.User.LastName)
+                        </span>
+                        <span class="post-separator"> | </span>
+                        <span class="post-date">@Html.Raw(Model.Post.PostCreationDate.ToLongShamsiWithWeek())</span>
+
+                        <div class="post-thumbnail">
+                            <a href="blog-details.html">
+                                <img src="/assets/posts/image/@Model.Post.PostImage" alt="">
+                            </a>
+                        </div>
+                        <div class="postinfo-wrapper">
+                            <p class="mb-30">@Html.Raw(Model.Post.PostDescription)</p>
+                            <a href="/a/@Model.Post.ShortUrl" class="readmore button">بیشتر بخوانید</a>
+                        </div>
+                        <div class="social-comment">
+                            <div class="social-sharing">
+                                <h3 class="social-title">به اشتراک گذاری این مطلب</h3>
+                                <ul class="social-icons">
+                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-telegram"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                            <a href="#" class="blog-comment">3 دیدگاه</a>
+                        </div>
+                    </div>
+                    <div class="paginatoin-area">
+                        <div class="row">
+                            <div class="col">
+                                <ul class="pagination-box">
+                                    <li><a class="Previous" href="#"> <i class="fa fa-angle-double-right"></i> </a></li>
+                                    <li><a class="active" href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a class="Next" href="#"> <i class="fa fa-angle-double-left"></i> </a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-12 col-12 order-2 order-lg-1">
+                <div class="categories-blog-area mt-60">
+                    <div class="single-categories-1 blog-search">
+                        <h3 class="blog-categorie-title">جزئیات پست</h3>
+                        <form action="#" class="blog-search-form">
+                            <div class="form-input">
+                                <input type="text" class="input-text" placeholder="جستجو ...">
+                                <button type="submit" class="blog-search-button"><i class="fa fa-search"></i></button>
+                            </div>
+                        </form>
+                    </div>
+                    @await Component.InvokeAsync("NewPostComponent")
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

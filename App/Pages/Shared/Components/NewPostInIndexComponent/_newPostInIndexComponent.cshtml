@@ -1,0 +1,30 @@
+﻿@model IEnumerable<App.Domain.Entities.Post.Post>
+<div class="col-lg-8 col-md-6">
+    <div class="box-module">
+        <div class="secton-title">
+            <h2>آخرین مطالب وبلاگ</h2>
+        </div>
+        @foreach (var post in Model)
+        {
+            <div class="row">
+             <div class="col-md-12">
+                 <div class="row">
+                     <div class="col-md-2">
+                         <div class="product-thumb">
+                             <a href="/post/@Html.Raw(post.PostTitleInBrowser)"><img src="/assets/posts/thumb/@post.PostImage" alt="@Html.Raw(post.PostTitle)" style="width:60px"></a>
+                         </div>
+                     </div>
+                     <div class="col-md-10">
+                         <h3 class="h5 font-weight-bold"><a href="/post/@Html.Raw(post.PostTitleInBrowser)">@Html.Raw(post.PostTitle)</a></h3>
+                         <div class="product-category-inner">
+                             <label>
+                                 @Html.Raw(post.PostDescription)
+                             </label>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+        }
+    </div>
+</div>

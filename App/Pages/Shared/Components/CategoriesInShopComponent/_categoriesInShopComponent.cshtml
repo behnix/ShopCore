@@ -1,0 +1,29 @@
+﻿@using App.Pages.Admin.Category
+@model IEnumerable<App.Domain.Entities.Product.Category>
+@{
+    List<int> selected = ViewBag.selectedCategory as List<int>;
+}
+<div class="categories-box sidebar-categores-box">
+    <div class="secton-title">
+        <h2>دسته بندی ها</h2>
+    </div>
+    <div class="sidebar-categores-inner">
+        <div class="filter-group">
+            @foreach (var category in Model.Where(c => c.ParentId == 0))
+            {
+                if (Model.Any(c => c.ParentId == category.Id))
+                {
+                    <div class="font-weight-bold mb-2"> @Html.Raw(category.Name) </div>
+                    foreach (var sub in Model.Where(c => c.ParentId == category.Id))
+                    {
+                        <div class="pl-3">
+                            <input onchange="changeCommit()" @(selected != null && selected.Any(s => s == sub.Id) ? "checked" : "") type="checkbox" name="selectedCategory" value="@sub.Id">
+                            <label> @Html.Raw(sub.Name) </label>
+                        </div>
+                    }
+                    <hr/>
+                }
+            }
+        </div>
+    </div>
+</div>

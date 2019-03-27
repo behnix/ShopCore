@@ -1,0 +1,65 @@
+﻿@page "/login"
+@model App.Pages.Account.LoginModel
+@{
+    ViewData["Title"] = "ورود به سایت";
+}
+<div class="breadcrumb-area bg-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ul>
+                    <li class="breadcrumb-item"><a href="/">خانه</a></li>
+                    <li class="breadcrumb-item active">@ViewData["Title"]</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content-wraper login-register-area bg-gray">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="customer-login-register">
+                    <h3 class="text-center">ورود به سایت</h3>
+                    <div class="login-Register-info">
+                        <form method="post" class="p-3">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <p class="coupon-input form-row-first">
+                                        <label asp-for="Account.UserName" class="control-label"></label>
+                                        <input asp-for="Account.UserName" />
+                                        <span asp-validation-for="Account.UserName" class="text-danger"></span>
+                                    </p>
+                                    <p class="coupon-input form-row-first">
+                                        <label asp-for="Account.Password" class="control-label"></label>
+                                        <input asp-for="Account.Password" type="password" />
+                                        <span asp-validation-for="Account.Password" class="text-danger"></span>
+                                    </p>
+                                    <p class="coupon-input form-row-first">
+                                        <label><input asp-for="Account.RememberMe" type="checkbox" value="true"><span>مرا به خاطر بسپار</span></label>
+                                    </p>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 py-4 px-3">
+                                    <p class="px-3 text-justify">با ثبت نام در سایت از مزایای خرید آنلاین، اطلاع از آخرین پیشنهادات ویژه، دریافت تخفیف های سایت و قابلیت نظر دهی در مورد محصولات، استفاده نمائید.</p>
+                                    <div class="form-group px-3">
+                                        <div>
+                                            <button class="btn btn-success" type="submit">ورود به سایت</button>
+                                            <a href="#" class="lost-password">رمز عبور خود را فراموش کرده اید؟</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

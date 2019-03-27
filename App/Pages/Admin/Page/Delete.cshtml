@@ -1,0 +1,61 @@
+﻿@page
+@model App.Pages.Admin.Page.DeleteModel
+
+@{
+    ViewData["Title"] = "حذف صفحه";
+    Layout = "_Admin";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-9">
+        <h2>حذف پست</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="/admin">خانه</a>
+            </li>
+            <li>
+                <a href="/admin/Page/">صفحه ها</a>
+            </li>
+            <li class="active">
+                حذف صفحه
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>آیا از حذف این صفحه اطمینان دارید؟</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-12">
+                            <p>
+                                @Html.DisplayNameFor(model => model.Page.PageTitle) :
+                                @Html.DisplayFor(model => model.Page.PageTitle)
+                            </p>
+                            <p>
+                                @Html.DisplayNameFor(model => model.Page.PageDescriptionForSearchEngines) :
+                                @Html.DisplayFor(model => model.Page.PageDescriptionForSearchEngines)
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <br />
+                            <form method="post">
+                                <input type="hidden" asp-for="Page.PageId" />
+                                <input type="submit" value="بله صفحه حذف شود؟" class="btn btn-danger btn-sm" />
+                                <a asp-page="Index" class="btn btn-info btn-sm">بازگشت</a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
